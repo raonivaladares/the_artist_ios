@@ -11,6 +11,7 @@ final class WelcomeViewController: UIViewController {
     var presenter: WelcomePresentable?
     
     override func loadView() {
-        view = WelcomeView()
+        let view = WelcomeView()
+//        view.viewActionsHandler()
     }
 }

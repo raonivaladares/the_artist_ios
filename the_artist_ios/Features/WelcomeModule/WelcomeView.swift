@@ -2,6 +2,14 @@ import UIKit
 import SnapKit
 
 class WelcomeView: UIView {
+    // MARK: View Actions
+    
+    enum ViewAction {
+        case actionButtonTapped
+    }
+    
+    // MARK: Private properties
+    
     let appLogoImageView: UIImageView = {
         let image = UIImage(named: "app_logo")
         let imageview = UIImageView(image: image)
@@ -13,7 +21,6 @@ class WelcomeView: UIView {
         let label = UILabel()
         label.text =
         "The $79 iWork ’08 appears to be a good deal for anyone needing an affordable office suite for the Mac."
-        
         label.textAlignment = .center
         label.font = UIFont.init(name: "OpenSans-Semibold", size: 18)
         label.textColor = UIColor.AppColors.black.withAlphaComponent(0.8)
@@ -25,6 +32,7 @@ class WelcomeView: UIView {
     
     let actionButton: UIButton = {
         let button = UIButton()
+        button.setTitle("START", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.init(name: "OpenSans-Extrabold", size: 15)
         button.backgroundColor = UIColor.AppColors.black
@@ -58,19 +66,28 @@ class WelcomeView: UIView {
         return stackView
     }()
     
+    // MARK: Public properties
+    typealias ViewOutput = (ViewAction) -> Void
+    
+    var viewActionsHandler: ViewOutput?
+    
+    // MARK: Inits
+    
     convenience init() {
         self.init(frame: .zero)
         
-        backgroundColor = .purple
+        backgroundColor = UIColor.AppColors.yellow
+        
         addViews()
         defineAndActivateConstraints()
     }
 }
 
 // MARK: Action Handlers
+
 extension WelcomeView {
     @objc private func actionButtonHandler(_ sender: UIButton) {
-//        viewActionsHandler?(.confirmed)
+        viewActionsHandler?(.actionButtonTapped)
     }
 }
 
@@ -131,29 +148,5 @@ extension WelcomeView {
             $0.width.equalTo(50)
             $0.height.equalTo(44)
         }
-    }
-}
-
-extension UIColor {
-    struct AppColors {
-        private init() { }
-        
-        static var black: UIColor {
-            return UIColor(red: 43/255, green: 43/255, blue: 43/255, alpha: 1)
-        }
-        
-        static var yellow: UIColor {
-            return  UIColor(red: 254/255, green: 211/255, blue: 0/255, alpha: 1)
-        }
-        
-        static var white: UIColor {
-            return  UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        }
-    }
-}
-
-extension UIView {
-    func addSubviews(_ views: UIView...) {
-        views.forEach(addSubview)
     }
 }
