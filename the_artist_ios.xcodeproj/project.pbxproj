@@ -56,6 +56,10 @@
 		FE4F3E022306DB8B0064DE1A /* AppStartupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartupRouter.swift; sourceTree = "<group>"; };
 		FE4F3E042306E0FC0064DE1A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		FEA7FC222306ED760098664E /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		FEA7FC2A2306F3D50098664E /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		FEA7FC2B2306F3D50098664E /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		FEA7FC2C2306F3D50098664E /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		FEA7FC2D2306F3D50098664E /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,7 @@
 		84A10E232306321B00A1BDF6 /* the_artist_ios */ = {
 			isa = PBXGroup;
 			children = (
+				FEA7FC282306F35A0098664E /* Fonts */,
 				84A10E532306371E00A1BDF6 /* Features */,
 				84A10E242306321B00A1BDF6 /* AppDelegate.swift */,
 				84A10E2B2306321D00A1BDF6 /* Assets.xcassets */,
@@ -185,6 +190,25 @@
 				FEA7FC222306ED760098664E /* SnapKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FEA7FC282306F35A0098664E /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				FEA7FC292306F3B00098664E /* OpenSans */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		FEA7FC292306F3B00098664E /* OpenSans */ = {
+			isa = PBXGroup;
+			children = (
+				FEA7FC2A2306F3D50098664E /* OpenSans-Bold.ttf */,
+				FEA7FC2D2306F3D50098664E /* OpenSans-ExtraBold.ttf */,
+				FEA7FC2C2306F3D50098664E /* OpenSans-Regular.ttf */,
+				FEA7FC2B2306F3D50098664E /* OpenSans-SemiBold.ttf */,
+			);
+			path = OpenSans;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
