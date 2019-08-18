@@ -1,10 +1,10 @@
 import UIKit
 import SnapKit
 
-class WelcomeView: UIView {
+final class WelcomeView: UIView {
     // MARK: View Actions
     
-    enum ViewAction {
+    enum Event {
         case actionButtonTapped
     }
     
@@ -67,9 +67,9 @@ class WelcomeView: UIView {
     }()
     
     // MARK: Public properties
-    typealias ViewOutput = (ViewAction) -> Void
+    typealias OutputHandler = (Event) -> Void
     
-    var viewActionsHandler: ViewOutput?
+    var outputHandler: OutputHandler?
     
     // MARK: Inits
     
@@ -87,7 +87,7 @@ class WelcomeView: UIView {
 
 extension WelcomeView {
     @objc private func actionButtonHandler(_ sender: UIButton) {
-        viewActionsHandler?(.actionButtonTapped)
+        outputHandler?(.actionButtonTapped)
     }
 }
 

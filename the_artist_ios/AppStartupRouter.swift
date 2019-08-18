@@ -13,6 +13,7 @@ final class AppStartupRouter {
             .assemble(navigationController: navigationController)
         navigationController.viewControllers = [viewController]
         window.rootViewController = navigationController
+        
         window.makeKeyAndVisible()
     }
 }
