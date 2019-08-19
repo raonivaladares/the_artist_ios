@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8486E16C230A218900155A83 /* SearchAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486E16B230A218900155A83 /* SearchAssembler.swift */; };
+		8486E16E230A220A00155A83 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486E16D230A220A00155A83 /* SearchViewController.swift */; };
+		8486E170230A225500155A83 /* SearchRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486E16F230A225500155A83 /* SearchRouter.swift */; };
+		8486E172230A22D200155A83 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486E171230A22D200155A83 /* SearchPresenter.swift */; };
 		84A10E252306321B00A1BDF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E242306321B00A1BDF6 /* AppDelegate.swift */; };
 		84A10E2C2306321D00A1BDF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A10E2B2306321D00A1BDF6 /* Assets.xcassets */; };
 		84A10E2F2306321D00A1BDF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A10E2D2306321D00A1BDF6 /* LaunchScreen.storyboard */; };
 		84A10E3A2306321D00A1BDF6 /* the_artist_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E392306321D00A1BDF6 /* the_artist_iosTests.swift */; };
 		84A10E452306321D00A1BDF6 /* the_artist_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E442306321D00A1BDF6 /* the_artist_iosUITests.swift */; };
-		84A10E552306375000A1BDF6 /* WelcomeModuleAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E542306375000A1BDF6 /* WelcomeModuleAssembler.swift */; };
+		84A10E552306375000A1BDF6 /* WelcomeAssembler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E542306375000A1BDF6 /* WelcomeAssembler.swift */; };
 		84A10E572306390400A1BDF6 /* WelcomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E562306390400A1BDF6 /* WelcomeRouter.swift */; };
 		84A10E592306393100A1BDF6 /* WelcomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E582306393100A1BDF6 /* WelcomePresenter.swift */; };
 		84A10E5B230639B200A1BDF6 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E5A230639B200A1BDF6 /* WelcomeViewController.swift */; };
@@ -40,6 +44,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8486E16B230A218900155A83 /* SearchAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAssembler.swift; sourceTree = "<group>"; };
+		8486E16D230A220A00155A83 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		8486E16F230A225500155A83 /* SearchRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRouter.swift; sourceTree = "<group>"; };
+		8486E171230A22D200155A83 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		84A10E212306321B00A1BDF6 /* the_artist_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = the_artist_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A10E242306321B00A1BDF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84A10E2B2306321D00A1BDF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -51,7 +59,7 @@
 		84A10E402306321D00A1BDF6 /* the_artist_iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = the_artist_iosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A10E442306321D00A1BDF6 /* the_artist_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = the_artist_iosUITests.swift; sourceTree = "<group>"; };
 		84A10E462306321D00A1BDF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		84A10E542306375000A1BDF6 /* WelcomeModuleAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeModuleAssembler.swift; sourceTree = "<group>"; };
+		84A10E542306375000A1BDF6 /* WelcomeAssembler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeAssembler.swift; sourceTree = "<group>"; };
 		84A10E562306390400A1BDF6 /* WelcomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeRouter.swift; sourceTree = "<group>"; };
 		84A10E582306393100A1BDF6 /* WelcomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePresenter.swift; sourceTree = "<group>"; };
 		84A10E5A230639B200A1BDF6 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
@@ -149,7 +157,7 @@
 		84A10E522306371200A1BDF6 /* WelcomeModule */ = {
 			isa = PBXGroup;
 			children = (
-				84A10E542306375000A1BDF6 /* WelcomeModuleAssembler.swift */,
+				84A10E542306375000A1BDF6 /* WelcomeAssembler.swift */,
 				84A10E562306390400A1BDF6 /* WelcomeRouter.swift */,
 				84A10E582306393100A1BDF6 /* WelcomePresenter.swift */,
 				84A10E5A230639B200A1BDF6 /* WelcomeViewController.swift */,
@@ -179,6 +187,10 @@
 		84A10E5D23063A3B00A1BDF6 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				8486E16B230A218900155A83 /* SearchAssembler.swift */,
+				8486E16D230A220A00155A83 /* SearchViewController.swift */,
+				8486E16F230A225500155A83 /* SearchRouter.swift */,
+				8486E171230A22D200155A83 /* SearchPresenter.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -370,12 +382,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8486E170230A225500155A83 /* SearchRouter.swift in Sources */,
 				FEA7FC2F2306FD610098664E /* UIView+AddSubviews.swift in Sources */,
+				8486E16E230A220A00155A83 /* SearchViewController.swift in Sources */,
 				84A10E592306393100A1BDF6 /* WelcomePresenter.swift in Sources */,
 				84A10E252306321B00A1BDF6 /* AppDelegate.swift in Sources */,
 				84A10E5B230639B200A1BDF6 /* WelcomeViewController.swift in Sources */,
+				8486E16C230A218900155A83 /* SearchAssembler.swift in Sources */,
 				FEA7FC31230724F10098664E /* UIColors+AppColors.swift in Sources */,
-				84A10E552306375000A1BDF6 /* WelcomeModuleAssembler.swift in Sources */,
+				84A10E552306375000A1BDF6 /* WelcomeAssembler.swift in Sources */,
+				8486E172230A22D200155A83 /* SearchPresenter.swift in Sources */,
 				84A10E572306390400A1BDF6 /* WelcomeRouter.swift in Sources */,
 				FE4F3E032306DB8B0064DE1A /* AppStartupRouter.swift in Sources */,
 				FE4F3E052306E0FC0064DE1A /* WelcomeView.swift in Sources */,

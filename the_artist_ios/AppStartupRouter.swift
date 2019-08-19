@@ -9,7 +9,7 @@ final class AppStartupRouter {
     
     func presentInitialViewController() {
         let navigationController = UINavigationController()
-        let viewController = WelcomeModuleAssembler()
+        let viewController = WelcomeAssembler()
             .assemble(navigationController: navigationController)
         navigationController.viewControllers = [viewController]
         window.rootViewController = navigationController

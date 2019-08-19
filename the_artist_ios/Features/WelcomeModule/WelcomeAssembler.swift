@@ -1,6 +1,6 @@
 import UIKit
 
-final class WelcomeModuleAssembler {
+final class WelcomeAssembler {
     func assemble(navigationController: UINavigationController) -> UIViewController {
         let viewController = WelcomeViewController()
         let router = WelcomeRouter(navigationController: navigationController)
