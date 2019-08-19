@@ -1,7 +1,7 @@
 import Foundation
 
 protocol SearchPresentable {
-    
+    func viewOutputHandler(event: SearchView.Event)
 }
 
 final class SearchPresenter {
@@ -10,4 +10,8 @@ final class SearchPresenter {
     }
 }
 
-extension SearchPresenter: SearchPresentable {}
+extension SearchPresenter: SearchPresentable {
+    func viewOutputHandler(event: SearchView.Event) {
+        
+    }
+}

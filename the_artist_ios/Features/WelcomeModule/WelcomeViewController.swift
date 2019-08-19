@@ -12,7 +12,7 @@ extension WelcomeViewController {
     }
 }
 
-// MARK: Override life-cycle
+// MARK: Override methods - life-cycle
 
 extension WelcomeViewController {
     override func viewWillAppear(_ animated: Bool) {
@@ -22,7 +22,7 @@ extension WelcomeViewController {
     }
 }
 
-// MARK: Override life-cycle
+// MARK: Override methods
 
 extension WelcomeViewController {
     override func loadView() {

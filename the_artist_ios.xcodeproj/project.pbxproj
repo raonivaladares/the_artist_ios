@@ -22,6 +22,7 @@
 		84A10E5B230639B200A1BDF6 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E5A230639B200A1BDF6 /* WelcomeViewController.swift */; };
 		FE4F3E032306DB8B0064DE1A /* AppStartupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4F3E022306DB8B0064DE1A /* AppStartupRouter.swift */; };
 		FE4F3E052306E0FC0064DE1A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4F3E042306E0FC0064DE1A /* WelcomeView.swift */; };
+		FE85A36F230B2C6C00B91A5A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE85A36E230B2C6C00B91A5A /* SearchView.swift */; };
 		FEA7FC2F2306FD610098664E /* UIView+AddSubviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA7FC2E2306FD610098664E /* UIView+AddSubviews.swift */; };
 		FEA7FC31230724F10098664E /* UIColors+AppColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEA7FC30230724F10098664E /* UIColors+AppColors.swift */; };
 /* End PBXBuildFile section */
@@ -65,6 +66,7 @@
 		84A10E5A230639B200A1BDF6 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
 		FE4F3E022306DB8B0064DE1A /* AppStartupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartupRouter.swift; sourceTree = "<group>"; };
 		FE4F3E042306E0FC0064DE1A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		FE85A36E230B2C6C00B91A5A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		FEA7FC222306ED760098664E /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
 		FEA7FC2A2306F3D50098664E /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		FEA7FC2B2306F3D50098664E /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				8486E16D230A220A00155A83 /* SearchViewController.swift */,
 				8486E16F230A225500155A83 /* SearchRouter.swift */,
 				8486E171230A22D200155A83 /* SearchPresenter.swift */,
+				FE85A36E230B2C6C00B91A5A /* SearchView.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				FEA7FC31230724F10098664E /* UIColors+AppColors.swift in Sources */,
 				84A10E552306375000A1BDF6 /* WelcomeAssembler.swift in Sources */,
 				8486E172230A22D200155A83 /* SearchPresenter.swift in Sources */,
+				FE85A36F230B2C6C00B91A5A /* SearchView.swift in Sources */,
 				84A10E572306390400A1BDF6 /* WelcomeRouter.swift in Sources */,
 				FE4F3E032306DB8B0064DE1A /* AppStartupRouter.swift in Sources */,
 				FE4F3E052306E0FC0064DE1A /* WelcomeView.swift in Sources */,
