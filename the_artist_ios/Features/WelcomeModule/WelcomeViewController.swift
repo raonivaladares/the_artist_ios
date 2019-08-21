@@ -1,6 +1,8 @@
 import UIKit
 
 final class WelcomeViewController: UIViewController {
+    // MARK: Public properties
+    
     var presenter: WelcomePresentable?
 }
 
