@@ -5,8 +5,16 @@ protocol SearchPresentable {
 }
 
 final class SearchPresenter {
+    private let viewController: SearchViewController
+    
     init(viewController: SearchViewController, router: SearchRouter) {
+        self.viewController = viewController
         
+        DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
+            let viewModel = SearchView.ViewModel()
+            self.viewController.configure(with: viewModel)
+            print("presenter->viewController->configure")
+        })
     }
 }
 

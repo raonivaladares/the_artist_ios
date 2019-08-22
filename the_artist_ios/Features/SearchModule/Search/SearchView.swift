@@ -6,7 +6,7 @@ final class SearchView: UIView {
         case endTyping(text: String)
     }
     
-    // MARK: Private properties
+    // MARK: Private properties - UI
     
     private let tableView: UITableView = {
         let tableView = UITableView.init(frame: .zero, style: .grouped)
@@ -19,8 +19,11 @@ final class SearchView: UIView {
         return tableView
     }()
     
-    // MARK: Public properties - ViewOutputable
-    typealias OutputHandler = (Event) -> Void
+    // MARK: Private properties
+    
+    private var searchResultCellsViewModels: [SearchResultCell.ViewModel] = []
+    
+    // MARK: Public properties - ViewOutput
     
     var outputHandler: OutputHandler?
     
@@ -40,11 +43,18 @@ final class SearchView: UIView {
     }
 }
 
-extension SearchView: ViewOutput {}
+// MARK: ViewOutput
+
+extension SearchView: ViewOutput {
+    typealias OutputHandler = (Event) -> Void
+}
+
+// MARK: ViewConfigurable
 
 extension SearchView: ViewConfigurable {
     func configure(with viewModel: ViewModel) {
-        print("SearchView -> configure")
+        searchResultCellsViewModels = viewModel.searchResultCellsViewModels
+        tableView.reloadData()
     }
 }
 
@@ -62,10 +72,13 @@ extension SearchView {
     }
     
     private func registerTableViewElements() {
-        //        tableView.register(SearchMovieResultCell.self, forCellReuseIdentifier: "SearchMovieResultCell")
         tableView.register(
             SearchHeaderCell.self,
             forHeaderFooterViewReuseIdentifier: "SearchHeaderCell"
+        )
+        tableView.register(
+            SearchResultCell.self,
+            forCellReuseIdentifier: "SearchResultCell"
         )
     }
 }
@@ -78,19 +91,18 @@ extension SearchView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return viewModel.numberOfRolls
-        return 0
+        return searchResultCellsViewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchMovieResultCell", for: indexPath) as! SearchMovieResultCell
-//
-//        let content = viewModel.cellContent(forIndex: indexPath.row)
-//        cell.configure(withContent: content)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath)
+            as! SearchResultCell
+
+        let viewModel = searchResultCellsViewModels[indexPath.row]
+        cell.configure(with: viewModel)
         
-//        return cell
-        return UITableViewCell()
+        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -108,6 +120,7 @@ extension SearchView: UITableViewDataSource {
         
 //        let item = viewModel.cellContents[indexPath.row]
 //        viewActionsHandler?(.itemSelected(item))
+        print("cell tapped")
     }
     
 }
