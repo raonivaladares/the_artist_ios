@@ -2,7 +2,8 @@ import UIKit
 
 final class SearchView: UIView {
     enum Event {
-        
+        case startTyping
+        case endTyping(text: String)
     }
     
     // MARK: Private properties
@@ -40,6 +41,12 @@ final class SearchView: UIView {
 }
 
 extension SearchView: ViewOutput {}
+
+extension SearchView: ViewConfigurable {
+    func configure(with viewModel: ViewModel) {
+        print("SearchView -> configure")
+    }
+}
 
 // MARK: Private methods
 
@@ -89,14 +96,15 @@ extension SearchView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "SearchHeaderCell") as! SearchHeaderCell
         header.textFieldEditingDidChangeHandler = { [weak self] text in
-//            self?.textFieldDidEndEditing(text: text)
+            self?.textFieldDidEndEditing(text: text)
         }
+        
         return header
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-//        view.endEditing(true)
+        endEditing(true)
         
 //        let item = viewModel.cellContents[indexPath.row]
 //        viewActionsHandler?(.itemSelected(item))
@@ -104,10 +112,25 @@ extension SearchView: UITableViewDataSource {
     
 }
 
+extension SearchView {
+    func textFieldDidEndEditing(text: String?) {
+        
+        if let text = text,
+            !text.isEmpty {
+            NSObject.cancelPreviousPerformRequests(withTarget: self)
+            perform(#selector(search), with: text, afterDelay: 3)
+        }
+    }
+    
+    @objc private func search(_ text: String) {
+        outputHandler?(.endTyping(text: text))
+    }
+}
+
 // MARK: UITableViewDelegate
 
 extension SearchView: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        view.endEditing(true)
+        endEditing(true)
     }
 }

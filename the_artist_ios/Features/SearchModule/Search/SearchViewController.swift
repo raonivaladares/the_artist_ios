@@ -1,6 +1,14 @@
 import UIKit
 
+
+protocol ViewConfigurable {
+    associatedtype ViewModel
+    func configure(with viewModel: ViewModel)
+}
+
 final class SearchViewController: UIViewController {
+    private let searchView = SearchView()
+    
     var presenter: SearchPresentable?
 }
 
@@ -28,15 +36,23 @@ extension SearchViewController {
     }
 }
 
+extension SearchViewController: ViewConfigurable {
+    typealias ViewModel = SearchView.ViewModel
+    
+    func configure(with viewModel: ViewModel) {
+        searchView.configure(with: viewModel)
+    }
+}
+
 
 // MARK: Override methods
 
 extension SearchViewController {
     override func loadView() {
-        let view = SearchView()
-        self.view = view
+        
+        view = searchView
         
         let presenter = self.presenter
-        view.outputHandler = { presenter?.viewOutputHandler(event: $0) }
+        searchView.outputHandler = { presenter?.viewOutputHandler(event: $0) }
     }
 }

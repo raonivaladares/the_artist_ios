@@ -22,6 +22,7 @@
 		84A10E572306390400A1BDF6 /* WelcomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E562306390400A1BDF6 /* WelcomeRouter.swift */; };
 		84A10E592306393100A1BDF6 /* WelcomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E582306393100A1BDF6 /* WelcomePresenter.swift */; };
 		84A10E5B230639B200A1BDF6 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E5A230639B200A1BDF6 /* WelcomeViewController.swift */; };
+		FE356E90230EC64C00FA5392 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356E8F230EC64C00FA5392 /* SearchResultCell.swift */; };
 		FE4F3E032306DB8B0064DE1A /* AppStartupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4F3E022306DB8B0064DE1A /* AppStartupRouter.swift */; };
 		FE4F3E052306E0FC0064DE1A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4F3E042306E0FC0064DE1A /* WelcomeView.swift */; };
 		FE85A36F230B2C6C00B91A5A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE85A36E230B2C6C00B91A5A /* SearchView.swift */; };
@@ -72,6 +73,7 @@
 		84A10E562306390400A1BDF6 /* WelcomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeRouter.swift; sourceTree = "<group>"; };
 		84A10E582306393100A1BDF6 /* WelcomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePresenter.swift; sourceTree = "<group>"; };
 		84A10E5A230639B200A1BDF6 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		FE356E8F230EC64C00FA5392 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		FE4F3E022306DB8B0064DE1A /* AppStartupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartupRouter.swift; sourceTree = "<group>"; };
 		FE4F3E042306E0FC0064DE1A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		FE85A36E230B2C6C00B91A5A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				8486E176230B6A8D00155A83 /* SearchHeaderCell.swift */,
+				FE356E8F230EC64C00FA5392 /* SearchResultCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				8486E16E230A220A00155A83 /* SearchViewController.swift in Sources */,
 				84A10E592306393100A1BDF6 /* WelcomePresenter.swift in Sources */,
 				FE85A373230D68F600B91A5A /* ArtDetailsViewController.swift in Sources */,
+				FE356E90230EC64C00FA5392 /* SearchResultCell.swift in Sources */,
 				84A10E252306321B00A1BDF6 /* AppDelegate.swift in Sources */,
 				84A10E5B230639B200A1BDF6 /* WelcomeViewController.swift in Sources */,
 				8486E174230B639D00155A83 /* ViewOutput.swift in Sources */,

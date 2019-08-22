@@ -5,6 +5,7 @@ final class SearchHeaderCell: UITableViewHeaderFooterView {
     private let descriptionLabel = UILabel()
     private let logoImageView = UIImageView()
     private let searchTextField = UITextField()
+    
     var textFieldEditingDidChangeHandler: ((String?) -> Void)?
     
     override init(reuseIdentifier: String?) {
