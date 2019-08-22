@@ -1,11 +1,20 @@
 import UIKit
 
 final class WelcomeRouter {
-    init(navigationController: UIViewController) {
-        
+    private let navigationController: UINavigationController
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
     
     func presentSearch() {
-        print("aa")
+        
+        let navigationControllerToPresent = UINavigationController()
+        let viewController = SearchAssembler()
+            .assemble(navigationController: navigationControllerToPresent)
+        
+        navigationControllerToPresent.viewControllers = [viewController]
+        
+        navigationController.present(navigationControllerToPresent, animated: true)
     }
 }

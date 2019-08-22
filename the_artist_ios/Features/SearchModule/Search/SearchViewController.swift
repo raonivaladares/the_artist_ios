@@ -12,6 +12,22 @@ extension SearchViewController {
     }
 }
 
+// MARK: Override methods - life-cycle
+
+extension SearchViewController {
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.isNavigationBarHidden = false
+    }
+}
+
 
 // MARK: Override methods
 
