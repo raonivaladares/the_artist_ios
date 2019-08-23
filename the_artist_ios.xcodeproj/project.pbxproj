@@ -32,6 +32,7 @@
 		FE356E9323102A3000FA5392 /* ReusableIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356E9223102A3000FA5392 /* ReusableIdentifier.swift */; };
 		FE356E9623102AAD00FA5392 /* UITextField+SetSidePaddingPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356E9523102AAD00FA5392 /* UITextField+SetSidePaddingPoints.swift */; };
 		FE356E99231041A300FA5392 /* ArtModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356E98231041A300FA5392 /* ArtModel.swift */; };
+		FE356E9F2310611D00FA5392 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356E9E2310611D00FA5392 /* Request.swift */; };
 		FE4F3E032306DB8B0064DE1A /* AppStartupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4F3E022306DB8B0064DE1A /* AppStartupRouter.swift */; };
 		FE4F3E052306E0FC0064DE1A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4F3E042306E0FC0064DE1A /* WelcomeView.swift */; };
 		FE85A36F230B2C6C00B91A5A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE85A36E230B2C6C00B91A5A /* SearchView.swift */; };
@@ -88,6 +89,7 @@
 		FE356E9223102A3000FA5392 /* ReusableIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableIdentifier.swift; sourceTree = "<group>"; };
 		FE356E9523102AAD00FA5392 /* UITextField+SetSidePaddingPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+SetSidePaddingPoints.swift"; sourceTree = "<group>"; };
 		FE356E98231041A300FA5392 /* ArtModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtModel.swift; sourceTree = "<group>"; };
+		FE356E9E2310611D00FA5392 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		FE4F3E022306DB8B0064DE1A /* AppStartupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartupRouter.swift; sourceTree = "<group>"; };
 		FE4F3E042306E0FC0064DE1A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 		FE85A36E230B2C6C00B91A5A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 		84A10E232306321B00A1BDF6 /* the_artist_ios */ = {
 			isa = PBXGroup;
 			children = (
+				FE356E9A23105D9000FA5392 /* NetworkPlataform */,
 				FE356E972310342E00FA5392 /* Domain */,
 				FE356E9423102A8500FA5392 /* Extension */,
 				FE356E91231029E800FA5392 /* Protocols */,
@@ -282,6 +285,22 @@
 				FE356E98231041A300FA5392 /* ArtModel.swift */,
 			);
 			path = Domain;
+			sourceTree = "<group>";
+		};
+		FE356E9A23105D9000FA5392 /* NetworkPlataform */ = {
+			isa = PBXGroup;
+			children = (
+				FE356E9B23105E2B00FA5392 /* Request */,
+			);
+			path = NetworkPlataform;
+			sourceTree = "<group>";
+		};
+		FE356E9B23105E2B00FA5392 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				FE356E9E2310611D00FA5392 /* Request.swift */,
+			);
+			path = Request;
 			sourceTree = "<group>";
 		};
 		FEA7FC212306ECE10098664E /* Frameworks */ = {
@@ -471,6 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8486E177230B6A8D00155A83 /* SearchHeaderCell.swift in Sources */,
+				FE356E9F2310611D00FA5392 /* Request.swift in Sources */,
 				FE85A371230D68A400B91A5A /* ArtDetailsView.swift in Sources */,
 				FE356E99231041A300FA5392 /* ArtModel.swift in Sources */,
 				8486E170230A225500155A83 /* SearchRouter.swift in Sources */,
