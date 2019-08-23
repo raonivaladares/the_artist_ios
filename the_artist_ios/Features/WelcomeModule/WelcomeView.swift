@@ -22,7 +22,7 @@ final class WelcomeView: UIView {
         label.text =
         "The $79 iWork ’08 appears to be a good deal for anyone needing an affordable office suite for the Mac."
         label.textAlignment = .center
-        label.font = UIFont.init(name: "OpenSans-Semibold", size: 18)
+        label.font = UIFont(name: "OpenSans-Semibold", size: 18)
         label.textColor = UIColor.AppColors.black.withAlphaComponent(0.8)
         label.numberOfLines = 0
         label.adjustsFontSizeToFitWidth = true
@@ -34,7 +34,7 @@ final class WelcomeView: UIView {
         let button = UIButton()
         button.setTitle("START", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.init(name: "OpenSans-Extrabold", size: 15)
+        button.titleLabel?.font = UIFont(name: "OpenSans-Extrabold", size: 15)
         button.backgroundColor = UIColor.AppColors.black
         button.layer.cornerRadius = 15
         button.addTarget(self, action: #selector(actionButtonHandler(_:)), for: .touchUpInside)
@@ -42,13 +42,18 @@ final class WelcomeView: UIView {
         return button
     }()
     
-    let tmdLogoImageView = UIImageView()
+    let theMETLogoImageView: UIImageView = {
+        let image = UIImage(named: "the_met_logo")
+        let imageview = UIImageView(image: image)
+        
+        return imageview
+    }()
     
     let theMETThanksLabel: UILabel = {
         let label = UILabel()
         label.text = "Thanks The MET for the content"
         label.textAlignment = .left
-        label.font = UIFont.init(name: "OpenSans-Semibold", size: 14)
+        label.font = UIFont(name: "OpenSans-Semibold", size: 14)
         label.textColor = UIColor.AppColors.black.withAlphaComponent(0.4)
         label.numberOfLines = 2
         label.adjustsFontSizeToFitWidth = true
@@ -101,7 +106,7 @@ extension WelcomeView {
             actionButton
         )
         
-        bottomContainerStackView.addArrangedSubview(tmdLogoImageView)
+        bottomContainerStackView.addArrangedSubview(theMETLogoImageView)
         bottomContainerStackView.addArrangedSubview(theMETThanksLabel)
         
         addSubviews(
@@ -113,8 +118,8 @@ extension WelcomeView {
     private func defineAndActivateConstraints() {
         centerContainerView.snp.makeConstraints {
             $0.centerY.equalToSuperview().offset(-10)
-            $0.leading.equalToSuperview().offset(30)
-            $0.trailing.equalToSuperview().offset(-30)
+            $0.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(30)
+            $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-30)
             $0.height.equalToSuperview().multipliedBy(0.65)
         }
         
@@ -144,7 +149,7 @@ extension WelcomeView {
             $0.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-60)
         }
         
-        tmdLogoImageView.snp.makeConstraints {
+        theMETLogoImageView.snp.makeConstraints {
             $0.width.equalTo(50)
             $0.height.equalTo(44)
         }

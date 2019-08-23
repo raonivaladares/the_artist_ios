@@ -88,16 +88,8 @@ extension SearchResultCell {
         
         stackView.snp.makeConstraints {
             $0.leading.equalTo(coverImageView.snp.trailing).offset(20)
-            $0.trailing.equalTo(coverImageView.snp.trailing).offset(-20)
+            $0.trailing.equalTo(contentView.snp.trailing).offset(-20)
             $0.centerY.equalTo(coverImageView.snp.centerY)
         }
-    }
-}
-
-extension SearchResultCell {
-    struct ViewModel {
-        let artTitle: String
-        let artPeriod: String
-        let coverPath: String
     }
 }

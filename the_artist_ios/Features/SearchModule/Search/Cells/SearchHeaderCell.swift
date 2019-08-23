@@ -44,7 +44,7 @@ extension SearchHeaderCell {
         descriptionLabel.font = UIFont(name: "OpenSans-Extrabold", size: 23)
         descriptionLabel.numberOfLines = 3
         
-        logoImageView.image = UIImage(named: "watcher_logo_small")
+        logoImageView.image = UIImage(named: "app_logo_small")
         
         searchTextField.backgroundColor = .white
         searchTextField.placeholder = "Type any movie here!"
@@ -57,9 +57,10 @@ extension SearchHeaderCell {
     }
     
     private func addViews() {
-        contentView.addSubviews(descriptionLabel,
-                                logoImageView,
-                                searchTextField
+        contentView.addSubviews(
+            descriptionLabel,
+            logoImageView,
+            searchTextField
         )
     }
     

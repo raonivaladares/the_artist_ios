@@ -24,7 +24,7 @@ final class ArtDetailsView: UIView {
     
     private let coverImageView: UIImageView = {
         let coverImageView = UIImageView()
-        
+        coverImageView.backgroundColor = .red
         return coverImageView
     }()
     

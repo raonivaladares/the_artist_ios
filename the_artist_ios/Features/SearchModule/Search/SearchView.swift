@@ -4,6 +4,7 @@ final class SearchView: UIView {
     enum Event {
         case startTyping
         case endTyping(text: String)
+        case cellTapped(content: SearchResultCell.ViewModel)
     }
     
     // MARK: Private properties - UI
@@ -21,7 +22,7 @@ final class SearchView: UIView {
     
     // MARK: Private properties
     
-    private var searchResultCellsViewModels: [SearchResultCell.ViewModel] = []
+    private var cellsViewModels: [SearchResultCell.ViewModel] = []
     
     // MARK: Public properties - ViewOutput
     
@@ -53,7 +54,7 @@ extension SearchView: ViewOutput {
 
 extension SearchView: ViewConfigurable {
     func configure(with viewModel: ViewModel) {
-        searchResultCellsViewModels = viewModel.searchResultCellsViewModels
+        cellsViewModels = viewModel.searchResultCellsViewModels
         tableView.reloadData()
     }
 }
@@ -91,7 +92,7 @@ extension SearchView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResultCellsViewModels.count
+        return cellsViewModels.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,7 +100,7 @@ extension SearchView: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SearchResultCell", for: indexPath)
             as! SearchResultCell
 
-        let viewModel = searchResultCellsViewModels[indexPath.row]
+        let viewModel = cellsViewModels[indexPath.row]
         cell.configure(with: viewModel)
         
         return cell
@@ -120,7 +121,8 @@ extension SearchView: UITableViewDataSource {
         
 //        let item = viewModel.cellContents[indexPath.row]
 //        viewActionsHandler?(.itemSelected(item))
-        print("cell tapped")
+        let cellViewModel = cellsViewModels[indexPath.row]
+        outputHandler?(.cellTapped(content: cellViewModel))
     }
     
 }

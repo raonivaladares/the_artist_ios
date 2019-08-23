@@ -6,9 +6,11 @@ protocol SearchPresentable {
 
 final class SearchPresenter {
     private let viewController: SearchViewController
+    private let router: SearchRouter
     
     init(viewController: SearchViewController, router: SearchRouter) {
         self.viewController = viewController
+        self.router = router
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
             let viewModel = SearchView.ViewModel()
@@ -20,7 +22,14 @@ final class SearchPresenter {
 
 extension SearchPresenter: SearchPresentable {
     func viewOutputHandler(event: SearchView.Event) {
-        
+        switch event {
+        case .startTyping:
+            break
+        case .endTyping(let text):
+            break
+        case .cellTapped(let content):
+            router.pushArtDetails(with: ArtModel())
+        }
     }
 }
 
