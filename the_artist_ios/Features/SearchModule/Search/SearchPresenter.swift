@@ -28,7 +28,16 @@ extension SearchPresenter: SearchPresentable {
         case .endTyping(let text):
             break
         case .cellTapped(let content):
-            router.pushArtDetails(with: ArtModel())
+            let artModel = ArtModel(
+                remoteID: 1,
+                title: "Stub",
+                objectName: "Stub",
+                period: "Stub",
+                culture: "Stub",
+                primaryImage: "Stub",
+                primaryImageSmall: "Stub"
+            )
+            router.pushArtDetails(with: artModel)
         }
     }
 }

@@ -1,4 +1,4 @@
-//import Alamofire
+import Alamofire
 
 //TODO: Avaliate if Requestable is needed.
 //protocol Requestable {
