@@ -14,7 +14,3 @@ final class SearchRouter {
         navigationController.pushViewController(viewController, animated: true)
     }
 }
-
-struct ArtModel {
-    
-}

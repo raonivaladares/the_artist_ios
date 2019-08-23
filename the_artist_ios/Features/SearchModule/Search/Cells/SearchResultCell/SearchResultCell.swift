@@ -1,6 +1,7 @@
 import UIKit
 
 final class SearchResultCell: UITableViewCell {
+    
     // MARK: Private UI properties
     
     private let coverImageView: UIImageView = {
@@ -93,3 +94,7 @@ extension SearchResultCell {
         }
     }
 }
+
+// MARK: ReusableIdentifier
+
+extension SearchResultCell: ReusableIdentifier {}

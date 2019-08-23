@@ -59,7 +59,28 @@ extension SearchView: ViewConfigurable {
     }
 }
 
+// MARK: Action handlers
+
+extension SearchView {
+    @objc private func search(_ text: String) {
+        outputHandler?(.endTyping(text: text))
+    }
+}
+
 // MARK: Private methods
+
+extension SearchView {
+    private func textFieldDidEndEditing(text: String?) {
+        
+        if let text = text,
+            !text.isEmpty {
+            NSObject.cancelPreviousPerformRequests(withTarget: self)
+            perform(#selector(search), with: text, afterDelay: 3)
+        }
+    }
+}
+
+// MARK: Private methods - UI
 
 extension SearchView {
     private func addViews() {
@@ -119,27 +140,10 @@ extension SearchView: UITableViewDataSource {
         
         endEditing(true)
         
-//        let item = viewModel.cellContents[indexPath.row]
-//        viewActionsHandler?(.itemSelected(item))
         let cellViewModel = cellsViewModels[indexPath.row]
         outputHandler?(.cellTapped(content: cellViewModel))
     }
     
-}
-
-extension SearchView {
-    func textFieldDidEndEditing(text: String?) {
-        
-        if let text = text,
-            !text.isEmpty {
-            NSObject.cancelPreviousPerformRequests(withTarget: self)
-            perform(#selector(search), with: text, afterDelay: 3)
-        }
-    }
-    
-    @objc private func search(_ text: String) {
-        outputHandler?(.endTyping(text: text))
-    }
 }
 
 // MARK: UITableViewDelegate
