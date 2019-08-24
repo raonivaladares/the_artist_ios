@@ -9,7 +9,7 @@ final class SearchRouter {
     
     func pushArtDetails(with artModel: ArtModel) {
         let viewController = ArtDetailsAssembler()
-            .assemble(navigationController: navigationController)
+            .assemble(artModel: artModel, navigationController: navigationController)
         
         navigationController.pushViewController(viewController, animated: true)
     }

@@ -19,6 +19,7 @@
 		8486E17F230F57EA00155A83 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEA7FC2C2306F3D50098664E /* OpenSans-Regular.ttf */; };
 		8486E180230F57EC00155A83 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = FEA7FC2B2306F3D50098664E /* OpenSans-SemiBold.ttf */; };
 		8486E182230F582800155A83 /* FontsWorkAround.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8486E181230F582800155A83 /* FontsWorkAround.xib */; };
+		8486E1852311BFC000155A83 /* ArtDetailsView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8486E1842311BFC000155A83 /* ArtDetailsView+ViewModel.swift */; };
 		84A10E252306321B00A1BDF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E242306321B00A1BDF6 /* AppDelegate.swift */; };
 		84A10E2C2306321D00A1BDF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 84A10E2B2306321D00A1BDF6 /* Assets.xcassets */; };
 		84A10E2F2306321D00A1BDF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84A10E2D2306321D00A1BDF6 /* LaunchScreen.storyboard */; };
@@ -79,6 +80,7 @@
 		8486E176230B6A8D00155A83 /* SearchHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHeaderCell.swift; sourceTree = "<group>"; };
 		8486E179230F55C400155A83 /* SearchResultCell+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchResultCell+ViewModel.swift"; sourceTree = "<group>"; };
 		8486E181230F582800155A83 /* FontsWorkAround.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FontsWorkAround.xib; sourceTree = "<group>"; };
+		8486E1842311BFC000155A83 /* ArtDetailsView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArtDetailsView+ViewModel.swift"; sourceTree = "<group>"; };
 		84A10E212306321B00A1BDF6 /* the_artist_ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = the_artist_ios.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84A10E242306321B00A1BDF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84A10E2B2306321D00A1BDF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,6 +167,15 @@
 				8486E179230F55C400155A83 /* SearchResultCell+ViewModel.swift */,
 			);
 			path = SearchResultCell;
+			sourceTree = "<group>";
+		};
+		8486E1832311BFA000155A83 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				FE85A370230D68A400B91A5A /* ArtDetailsView.swift */,
+				8486E1842311BFC000155A83 /* ArtDetailsView+ViewModel.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		84A10E182306321B00A1BDF6 = {
@@ -273,9 +284,9 @@
 		84A10E5E23063A4600A1BDF6 /* Details */ = {
 			isa = PBXGroup;
 			children = (
+				8486E1832311BFA000155A83 /* New Group */,
 				FE85A374230D693C00B91A5A /* ArtDetailsAssembler.swift */,
 				FE85A372230D68F600B91A5A /* ArtDetailsViewController.swift */,
-				FE85A370230D68A400B91A5A /* ArtDetailsView.swift */,
 				FE85A376230D695800B91A5A /* ArtDetailsPresenter.swift */,
 			);
 			path = Details;
@@ -539,11 +550,13 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 			);
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/SnapKit.framework",
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/Alamofire.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -572,6 +585,7 @@
 				84A10E592306393100A1BDF6 /* WelcomePresenter.swift in Sources */,
 				FE85A373230D68F600B91A5A /* ArtDetailsViewController.swift in Sources */,
 				FE356E90230EC64C00FA5392 /* SearchResultCell.swift in Sources */,
+				8486E1852311BFC000155A83 /* ArtDetailsView+ViewModel.swift in Sources */,
 				84A10E252306321B00A1BDF6 /* AppDelegate.swift in Sources */,
 				84A10E5B230639B200A1BDF6 /* WelcomeViewController.swift in Sources */,
 				FE356EA62310675800FA5392 /* APIConfiguration.swift in Sources */,

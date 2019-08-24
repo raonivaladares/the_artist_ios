@@ -1,7 +1,10 @@
 import UIKit
 
 final class ArtDetailsViewController: UIViewController {
+    private let artDetailsView = ArtDetailsView()
+    
     // MARK: Public properties
+    
     var presenter: ArtDetailsPresenter?
 }
 
@@ -9,11 +12,19 @@ final class ArtDetailsViewController: UIViewController {
 
 extension ArtDetailsViewController {
     override func loadView() {
-        let view = ArtDetailsView()
-        self.view = view
+        self.view = artDetailsView
         
-        let presenter = self.presenter
-        view.outputHandler = { presenter?.viewOutputHandler(event: $0) }
+//        let presenter = self.presenter
+//        view.outputHandler = { presenter?.viewOutputHandler(event: $0) }
     }
 }
 
+// MARK: ViewConfigurable
+
+extension ArtDetailsViewController: ViewConfigurable {
+    typealias ViewModel = ArtDetailsView.ViewModel
+    
+    func configure(with viewModel: ViewModel) {
+        artDetailsView.configure(with: viewModel)
+    }
+}
