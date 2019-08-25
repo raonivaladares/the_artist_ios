@@ -9,7 +9,7 @@ struct SearchWebService {
         self.requestExecuter = requestExecuter
     }
     
-    func search(query: String) {
+    func search(query: String, completion: (Result<ArtSearchResult, ApplicationError>) -> Void) {
         let parameters = ["q": query]
         let request = RequestBuilder(
             action: APIAction.SearchContent(),
@@ -18,7 +18,13 @@ struct SearchWebService {
         .parameters(parameters: parameters)
         .build()
         
-        requestExecuter.execute(request: request)
-        print(request)
+        requestExecuter.execute(request: request) { result in
+            switch result {
+            case .success(let deta):
+                break
+            case .failure(let error):
+                break
+            }
+        }
     }
 }

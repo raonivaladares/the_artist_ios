@@ -7,7 +7,11 @@ final class AlamofireRequestExecuter: RequestExecuter {
         //        serverErrorParser = WatcherServerErrorParser()
     }
     
-    func execute(request: Requestable) { //completion: @escaping (Result<JSON, ServerError>) -> Void
+    #warning("Change ApplicationError to server error")
+    func execute(
+        request: Requestable,
+        completion: @escaping (Result<Data, ApplicationError>) -> Void) {
+        
         Alamofire.AF.request(
             request.path,
             method: request.method,
@@ -18,14 +22,12 @@ final class AlamofireRequestExecuter: RequestExecuter {
                 //                    completion(.failure(error))
                 //                }
                 
-                //                guard let data = dataResponse.data else {
-                //                    completion(.failure(ServerError.emptyDataResponse))
-                //                    return
-                //                }
+                guard let data = dataResponse.data else {
+                    completion(.failure(.unkown))//ServerError.emptyDataResponse
+                    return
+                }
                 
-                //                let json = JSON(data)
-                //                completion(.success(json))
-                print(dataResponse)
+                completion(.success(data))
         }
     }
 }

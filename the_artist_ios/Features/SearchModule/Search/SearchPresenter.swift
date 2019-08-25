@@ -5,10 +5,15 @@ protocol SearchPresentable {
 }
 
 final class SearchPresenter {
+    private let searchArtUseCases: SearchArtUseCases
     private let viewController: SearchViewController
     private let router: SearchRouter
     
-    init(viewController: SearchViewController, router: SearchRouter) {
+    init(searchArtUseCases: SearchArtUseCases,
+         viewController: SearchViewController,
+         router: SearchRouter) {
+        
+        self.searchArtUseCases = searchArtUseCases
         self.viewController = viewController
         self.router = router
         
@@ -24,22 +29,40 @@ extension SearchPresenter: SearchPresentable {
     func viewOutputHandler(event: SearchView.Event) {
         switch event {
         case .startTyping:
-            break
+            clearCurrentSearchResults()
         case .endTyping(let text):
-            break
-        case .cellTapped(let content):
-            let artModel = ArtModel(
-                remoteID: 1,
-                title: "Stub",
-                objectName: "Stub",
-                period: "Stub",
-                culture: "Stub",
-                primaryImage: "Stub",
-                primaryImageSmall: "Stub"
-            )
-            router.pushArtDetails(with: artModel)
+            searchForArt(withText: text)
+        case .cellTapped(let cellViewModel):
+            cellTapped(with: cellViewModel)
         }
     }
+    
+    private func clearCurrentSearchResults() {
+        
+    }
+    
+    private func searchForArt(withText text: String) {
+        searchArtUseCases.search(query: text) { result in
+            switch result {
+            case .success(let artSearchResult): break
+            case .failure(let error): break
+            }
+        }
+    }
+    
+    private func cellTapped(with cellViewModel: SearchResultCell.ViewModel) {
+        let artModel = ArtModel(
+            remoteID: 1,
+            title: "Stub",
+            objectName: "Stub",
+            period: "Stub",
+            culture: "Stub",
+            primaryImage: "Stub",
+            primaryImageSmall: "Stub"
+        )
+        router.pushArtDetails(with: artModel)
+    }
+    
 }
 
 extension SearchView {
