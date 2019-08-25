@@ -1,0 +1,5 @@
+os: osx
+language: Swift
+osx_image: xcode10.3
+script:
+  xcodebuild clean test -scheme the_artist_ios -project the_artist_ios.xcodeproj  -destination "platform=iOS Simulator,name=iPhone X,OS=12.4" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -quiet
