@@ -1,7 +1,7 @@
 import Foundation
 
 protocol SearchArtUseCases {
-    func search(query: String, completion: (Result<ArtSearchResult, ApplicationError>) -> Void)
+    func search(query: String, completion: (Result<ArtSearchResultsModel, ApplicationError>) -> Void)
 }
 
 final class SearchArtUseCasesImp {
@@ -13,15 +13,11 @@ final class SearchArtUseCasesImp {
 }
 
 extension SearchArtUseCasesImp: SearchArtUseCases {
-    func search(query: String, completion: (Result<ArtSearchResult, ApplicationError>) -> Void) {
+    func search(query: String, completion: (Result<ArtSearchResultsModel, ApplicationError>) -> Void) {
         searchWebService.search(query: query) { result in
             
         }
     }
-}
-
-struct ArtSearchResult {
-    let remoteArtsIDs: [Int]
 }
 
 enum ApplicationError: Error {

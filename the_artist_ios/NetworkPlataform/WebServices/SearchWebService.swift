@@ -9,7 +9,7 @@ struct SearchWebService {
         self.requestExecuter = requestExecuter
     }
     
-    func search(query: String, completion: (Result<ArtSearchResult, ApplicationError>) -> Void) {
+    func search(query: String, completion: (Result<ArtSearchResultsModel, ApplicationError>) -> Void) {
         let parameters = ["q": query]
         let request = RequestBuilder(
             action: APIAction.SearchContent(),
