@@ -20,8 +20,10 @@ struct SearchWebService {
         
         requestExecuter.execute(request: request) { result in
             switch result {
-            case .success(let deta):
-                break
+            case .success(let data):
+                let decoder = JSONDecoder()
+                let foo = try? decoder.decode(ArtSearchResultsModel.self, from: data)
+                print(foo)
             case .failure(let error):
                 break
             }
