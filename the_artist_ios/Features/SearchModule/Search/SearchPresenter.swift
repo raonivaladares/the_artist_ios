@@ -6,21 +6,23 @@ protocol SearchPresentable {
 
 final class SearchPresenter {
     private let searchArtUseCases: SearchArtUseCases
+    private let retrieveArtUseCases: RetrieveArtUseCases
     private let viewController: SearchViewController
     private let router: SearchRouter
     
     init(searchArtUseCases: SearchArtUseCases,
+         retrieveArtUseCases: RetrieveArtUseCases,
          viewController: SearchViewController,
          router: SearchRouter) {
         
         self.searchArtUseCases = searchArtUseCases
+        self.retrieveArtUseCases = retrieveArtUseCases
         self.viewController = viewController
         self.router = router
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 6.0, execute: {
             let viewModel = SearchView.ViewModel()
             self.viewController.configure(with: viewModel)
-            print("presenter->viewController->configure")
         })
     }
 }
@@ -44,9 +46,16 @@ extension SearchPresenter: SearchPresentable {
     private func searchForArt(withText text: String) {
         searchArtUseCases.search(query: text) { result in
             switch result {
-            case .success(let artSearchResult): break
+            case .success(let artSearchResultModel):
+                self.searchResultHandler(artSearchResultModel)
             case .failure(let error): break
             }
+        }
+    }
+    
+    private func searchResultHandler(_ artSearchResultModel: ArtSearchResultsModel) {
+        retrieveArtUseCases.retrieve(artID: 1) { result in
+            
         }
     }
     

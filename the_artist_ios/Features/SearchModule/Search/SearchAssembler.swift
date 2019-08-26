@@ -2,13 +2,16 @@ import UIKit
 
 final class SearchAssembler {
     func assemble(navigationController: UINavigationController) -> UIViewController {
-        let searchWebService = WebServiceFactory().createSearchWebService()
-        let searchArtUseCases = SearchArtUseCasesImp(searchWebService: searchWebService)
+        let searchArtWebService = WebServiceFactory().createSearchArtWebService()
+        let searchArtUseCases = SearchArtUseCasesImp(searchWebService: searchArtWebService)
+        let retrieveArtWebService = WebServiceFactory().createRetrieveArtWebService()
+        let retrieveArtUseCases = RetrieveArtUseCasesImp(retrieveArtWebService: retrieveArtWebService)
         
         let viewController = SearchViewController()
         let router = SearchRouter(navigationController: navigationController)
         let presenter = SearchPresenter(
             searchArtUseCases: searchArtUseCases,
+            retrieveArtUseCases: retrieveArtUseCases,
             viewController: viewController,
             router: router
         )

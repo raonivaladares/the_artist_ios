@@ -1,6 +1,6 @@
 import Foundation
 
-final class SearchArtWebService {
+final class RetrieveArtWebService {
     private let configuration: WebServiceConfiguration
     private let requestExecuter: RequestExecuter
     
@@ -9,22 +9,17 @@ final class SearchArtWebService {
         self.requestExecuter = requestExecuter
     }
     
-    func search(query: String, completion: @escaping (Result<ArtSearchResultsModel, ApplicationError>) -> Void) {
-        let parameters = ["q": query]
+    func retrieveArt(withID artRemoteID: Int) {
         let request = RequestBuilder(
-            action: APIAction.SearchArt(),
+            action: APIAction.RetrieveArt(artRemoteID: artRemoteID),
             configuration: configuration
         )
-        .parameters(parameters: parameters)
         .build()
         
         requestExecuter.execute(request: request) { result in
             switch result {
             case .success(let data):
-                let decoder = JSONDecoder()
-                let foo = try? decoder.decode(ArtSearchResultsModel.self, from: data)
-                print(foo)
-                completion(.success(foo!))
+                print(data)
             case .failure(let error):
                 break
             }

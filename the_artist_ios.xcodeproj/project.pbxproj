@@ -30,6 +30,7 @@
 		84A10E572306390400A1BDF6 /* WelcomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E562306390400A1BDF6 /* WelcomeRouter.swift */; };
 		84A10E592306393100A1BDF6 /* WelcomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E582306393100A1BDF6 /* WelcomePresenter.swift */; };
 		84A10E5B230639B200A1BDF6 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84A10E5A230639B200A1BDF6 /* WelcomeViewController.swift */; };
+		FE336E5B231412C1001A5482 /* RecoverArtUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE336E5A231412C1001A5482 /* RecoverArtUseCases.swift */; };
 		FE356E90230EC64C00FA5392 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356E8F230EC64C00FA5392 /* SearchResultCell.swift */; };
 		FE356E9323102A3000FA5392 /* ReusableIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356E9223102A3000FA5392 /* ReusableIdentifier.swift */; };
 		FE356E9623102AAD00FA5392 /* UITextField+SetSidePaddingPoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356E9523102AAD00FA5392 /* UITextField+SetSidePaddingPoints.swift */; };
@@ -41,7 +42,7 @@
 		FE356EA82310676B00FA5392 /* SearchWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356EA72310676B00FA5392 /* SearchWebService.swift */; };
 		FE356EAA2310677300FA5392 /* RequestExecuter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356EA92310677300FA5392 /* RequestExecuter.swift */; };
 		FE356EAC23106AB800FA5392 /* WebServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356EAB23106AB800FA5392 /* WebServiceFactory.swift */; };
-		FE356EAF2310744700FA5392 /* ArtDetailsWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356EAE2310744700FA5392 /* ArtDetailsWebService.swift */; };
+		FE356EAF2310744700FA5392 /* RetrieveArtWebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356EAE2310744700FA5392 /* RetrieveArtWebService.swift */; };
 		FE356EB2231079BA00FA5392 /* AlamofireRequestExecuter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356EB1231079BA00FA5392 /* AlamofireRequestExecuter.swift */; };
 		FE356EB6231084D500FA5392 /* SearchArtUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356EB5231084D500FA5392 /* SearchArtUseCases.swift */; };
 		FE4F3E032306DB8B0064DE1A /* AppStartupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4F3E022306DB8B0064DE1A /* AppStartupRouter.swift */; };
@@ -98,6 +99,7 @@
 		84A10E562306390400A1BDF6 /* WelcomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeRouter.swift; sourceTree = "<group>"; };
 		84A10E582306393100A1BDF6 /* WelcomePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomePresenter.swift; sourceTree = "<group>"; };
 		84A10E5A230639B200A1BDF6 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		FE336E5A231412C1001A5482 /* RecoverArtUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverArtUseCases.swift; sourceTree = "<group>"; };
 		FE356E8F230EC64C00FA5392 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		FE356E9223102A3000FA5392 /* ReusableIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReusableIdentifier.swift; sourceTree = "<group>"; };
 		FE356E9523102AAD00FA5392 /* UITextField+SetSidePaddingPoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+SetSidePaddingPoints.swift"; sourceTree = "<group>"; };
@@ -109,7 +111,7 @@
 		FE356EA72310676B00FA5392 /* SearchWebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchWebService.swift; sourceTree = "<group>"; };
 		FE356EA92310677300FA5392 /* RequestExecuter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestExecuter.swift; sourceTree = "<group>"; };
 		FE356EAB23106AB800FA5392 /* WebServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceFactory.swift; sourceTree = "<group>"; };
-		FE356EAE2310744700FA5392 /* ArtDetailsWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtDetailsWebService.swift; sourceTree = "<group>"; };
+		FE356EAE2310744700FA5392 /* RetrieveArtWebService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrieveArtWebService.swift; sourceTree = "<group>"; };
 		FE356EB1231079BA00FA5392 /* AlamofireRequestExecuter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireRequestExecuter.swift; sourceTree = "<group>"; };
 		FE356EB5231084D500FA5392 /* SearchArtUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtUseCases.swift; sourceTree = "<group>"; };
 		FE4F3E022306DB8B0064DE1A /* AppStartupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartupRouter.swift; sourceTree = "<group>"; };
@@ -353,7 +355,7 @@
 			children = (
 				FE356EAB23106AB800FA5392 /* WebServiceFactory.swift */,
 				FE356EA72310676B00FA5392 /* SearchWebService.swift */,
-				FE356EAE2310744700FA5392 /* ArtDetailsWebService.swift */,
+				FE356EAE2310744700FA5392 /* RetrieveArtWebService.swift */,
 			);
 			path = WebServices;
 			sourceTree = "<group>";
@@ -371,6 +373,7 @@
 			isa = PBXGroup;
 			children = (
 				FE356EB5231084D500FA5392 /* SearchArtUseCases.swift */,
+				FE336E5A231412C1001A5482 /* RecoverArtUseCases.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -585,9 +588,10 @@
 				FE356EA1231066E500FA5392 /* RequestBuilder.swift in Sources */,
 				FE356E99231041A300FA5392 /* ArtModel.swift in Sources */,
 				8486E170230A225500155A83 /* SearchRouter.swift in Sources */,
-				FE356EAF2310744700FA5392 /* ArtDetailsWebService.swift in Sources */,
+				FE356EAF2310744700FA5392 /* RetrieveArtWebService.swift in Sources */,
 				FEA7FC2F2306FD610098664E /* UIView+AddSubviews.swift in Sources */,
 				8486E17A230F55C400155A83 /* SearchResultCell+ViewModel.swift in Sources */,
+				FE336E5B231412C1001A5482 /* RecoverArtUseCases.swift in Sources */,
 				8486E16E230A220A00155A83 /* SearchViewController.swift in Sources */,
 				84A10E592306393100A1BDF6 /* WelcomePresenter.swift in Sources */,
 				FE85A373230D68F600B91A5A /* ArtDetailsViewController.swift in Sources */,

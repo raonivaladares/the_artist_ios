@@ -1,18 +1,18 @@
 import Foundation
 
 final class WebServiceFactory {
-    func createSearchWebService() -> SearchWebService {
+    func createSearchArtWebService() -> SearchArtWebService {
         let configuration = TheMETWebServiceConfiguration()
         let requestExecuter = AlamofireRequestExecuter()
-        let webService = SearchWebService(configuration: configuration, requestExecuter: requestExecuter)
+        let webService = SearchArtWebService(configuration: configuration, requestExecuter: requestExecuter)
         
         return webService
     }
     
-    func createArtDetailsWebService() -> ArtDetailsWebService {
+    func createRetrieveArtWebService() -> RetrieveArtWebService {
         let configuration = TheMETWebServiceConfiguration()
         let requestExecuter = AlamofireRequestExecuter()
-        let webService = ArtDetailsWebService(configuration: configuration, requestExecuter: requestExecuter)
+        let webService = RetrieveArtWebService(configuration: configuration, requestExecuter: requestExecuter)
         
         return webService
     }
