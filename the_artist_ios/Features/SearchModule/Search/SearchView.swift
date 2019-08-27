@@ -54,8 +54,26 @@ extension SearchView: ViewOutput {
 
 extension SearchView: ViewConfigurable {
     func configure(with viewModel: ViewModel) {
-        cellsViewModels = viewModel.searchResultCellsViewModels
-        tableView.reloadData()
+        if let cellsViewModels = viewModel.cellViewModels {
+            self.cellsViewModels = cellsViewModels
+            tableView.reloadData()
+        }
+        
+        if let itemsToUpdate = viewModel.updatableItems {
+            for item in itemsToUpdate {
+//                item.position
+//                item.viewModel
+                
+                cellsViewModels.remove(at: item.position)
+                cellsViewModels.insert(item.cellViewModel, at: item.position)
+                tableView.beginUpdates()
+                let indexPath = IndexPath.init(row: item.position, section: 0)
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+                tableView.endUpdates()
+            }
+//            cellsViewModels = viewModel.searchResultCellsViewModels
+//            tableView.reloadData()
+        }
     }
 }
 

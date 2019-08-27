@@ -9,7 +9,7 @@ final class RetrieveArtWebService {
         self.requestExecuter = requestExecuter
     }
     
-    func retrieveArt(withID artRemoteID: Int) {
+    func retrieveArt(withID artRemoteID: Int, completion: @escaping (Result<ArtModel, ApplicationError>) -> Void) {
         let request = RequestBuilder(
             action: APIAction.RetrieveArt(artRemoteID: artRemoteID),
             configuration: configuration
@@ -19,7 +19,9 @@ final class RetrieveArtWebService {
         requestExecuter.execute(request: request) { result in
             switch result {
             case .success(let data):
-                print(data)
+                let decoder = JSONDecoder()
+                let artModel = try! decoder.decode(ArtModel.self, from: data)
+                completion(.success(artModel))
             case .failure(let error):
                 break
             }

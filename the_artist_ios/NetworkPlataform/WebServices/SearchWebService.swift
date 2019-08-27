@@ -23,7 +23,6 @@ final class SearchArtWebService {
             case .success(let data):
                 let decoder = JSONDecoder()
                 let foo = try? decoder.decode(ArtSearchResultsModel.self, from: data)
-                print(foo)
                 completion(.success(foo!))
             case .failure(let error):
                 break

@@ -1,7 +1,7 @@
 import Foundation
 
 protocol RetrieveArtUseCases {
-    func retrieve(artID: Int, completion: (Result<ArtModel, ApplicationError>) -> Void)
+    func retrieve(artRemoteID id: Int, completion: @escaping (Result<ArtModel, ApplicationError>) -> Void)
 }
 
 final class RetrieveArtUseCasesImp {
@@ -13,7 +13,14 @@ final class RetrieveArtUseCasesImp {
 }
 
 extension RetrieveArtUseCasesImp: RetrieveArtUseCases {
-    func retrieve(artID: Int, completion: (Result<ArtModel, ApplicationError>) -> Void) {
-        retrieveArtWebService.retrieveArt(withID: 1)
+    func retrieve(artRemoteID id: Int, completion: @escaping (Result<ArtModel, ApplicationError>) -> Void) {
+        retrieveArtWebService.retrieveArt(withID: id) { result in
+            switch result {
+            case .success(let artModel):
+                completion(.success(artModel))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 }
