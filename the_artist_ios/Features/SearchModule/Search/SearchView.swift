@@ -89,7 +89,7 @@ extension SearchView {
 
 extension SearchView {
     private func textFieldDidEndEditing(text: String?) {
-        
+        outputHandler?(.startTyping) //TODO: remove temp clean up
         if let text = text,
             !text.isEmpty {
             NSObject.cancelPreviousPerformRequests(withTarget: self)

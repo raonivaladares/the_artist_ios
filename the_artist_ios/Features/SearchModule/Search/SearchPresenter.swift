@@ -10,8 +10,11 @@ final class SearchPresenter {
     private let viewController: SearchViewController
     private let router: SearchRouter
     
-    private var positionsMap: [Int: Int] = [:]
+//    private var positionsMap: [Int: Int] = [:]
+    private var artIDsToRetrieve: [Int] = []
+    
     private var artModels: [ArtModel] = []
+    private var cellViewModels: [SearchResultCell.ViewModel] = []
     
     init(searchArtUseCases: SearchArtUseCases,
          retrieveArtUseCases: RetrieveArtUseCases,
@@ -43,6 +46,9 @@ extension SearchPresenter: SearchPresentable {
     }
     
     private func clearCurrentSearchResults() {
+        artIDsToRetrieve = []
+        artModels = []
+        cellViewModels = []
         let viewModel = SearchView.ViewModel(state: .clearLastSearchResult)
         viewController.configure(with: viewModel)
     }
@@ -62,22 +68,48 @@ extension SearchPresenter: SearchPresentable {
     
     
     private func searchResultHandler(_ artSearchResultModel: ArtSearchResultsModel) {
-        
-        retrieveArtUseCases.retrieve(artRemoteID: 1) { result in
+        artIDsToRetrieve = artSearchResultModel.remoteArtsIDs
+        retriveArtsFromIDs(artIDsToRetrieve)
+//        retrieveArtUseCases.retrieve(artRemoteID: 1) { result in
+//            switch result {
+//            case .success(let artModel):
+//                self.artModels.append(artModel)
+////                let count = self.positionsMap.count + 1
+////                self.positionsMap[artModel.remoteID] = count
+//                let cellViewModel = SearchResultCell.ViewModel(artTitle: artModel.title, artPeriod: artModel.period, coverPath: "")
+//                let viewModel = SearchView.ViewModel(state: .updateListItem(items: [(0, cellViewModel)]))
+//                self.viewController.configure(with: viewModel)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+    }
+    
+    private func retriveArtsFromIDs(_ ids: [Int]) {
+        var count = 0
+        for id in ids {
+            if count  >= 20 { break }
+            count += 1
+            retriveArtsFromID(id)
+        }
+    }
+    
+    private func retriveArtsFromID(_ id: Int) {
+        retrieveArtUseCases.retrieve(artRemoteID: id) { [weak self] result in
             switch result {
             case .success(let artModel):
-                self.artModels.append(artModel)
-                let count = self.positionsMap.count + 1
-                self.positionsMap[artModel.remoteID] = count
-//                let foo = [1: SearchResultCell.ViewModel]
-                let cellViewModel = SearchResultCell.ViewModel(artTitle: artModel.title, artPeriod: artModel.period, coverPath: "")
-//                [(potision: 0, cellViewModel: cellViewModel)]
-                let viewModel = SearchView.ViewModel(state: .updateListItem(items: [(0, cellViewModel)]))
-                self.viewController.configure(with: viewModel)
+                self?.incrementArtModels(artModel: artModel)
+                print("____________________________________________________________________________________")
+                print(self?.artModels.count ?? -1000)
+                print("____________________________________________________________________________________")
             case .failure(let error):
-                print(error)
+                break
             }
         }
+    }
+    
+    private func incrementArtModels(artModel: ArtModel) {
+        artModels.append(artModel)
     }
     
     private func cellTapped(with cellViewModel: SearchResultCell.ViewModel) {
