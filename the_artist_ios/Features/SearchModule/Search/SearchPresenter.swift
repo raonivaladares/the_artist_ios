@@ -5,6 +5,8 @@ protocol SearchPresentable {
 }
 
 final class SearchPresenter {
+    private let fetchBanchLimite = 20
+    
     private let searchArtUseCases: SearchArtUseCases
     private let retrieveArtUseCases: RetrieveArtUseCases
     private let viewController: SearchViewController
@@ -12,6 +14,7 @@ final class SearchPresenter {
     
 //    private var positionsMap: [Int: Int] = [:]
     private var artIDsToRetrieve: [Int] = []
+    private var banchOfIDsToRetrieve: [[Int]] = []
     
     private var artModels: [ArtModel] = []
     private var cellViewModels: [SearchResultCell.ViewModel] = []
@@ -49,6 +52,7 @@ extension SearchPresenter: SearchPresentable {
         artIDsToRetrieve = []
         artModels = []
         cellViewModels = []
+        banchOfIDsToRetrieve = []
         let viewModel = SearchView.ViewModel(state: .clearLastSearchResult)
         viewController.configure(with: viewModel)
     }
@@ -57,9 +61,6 @@ extension SearchPresenter: SearchPresentable {
         searchArtUseCases.search(query: text) { result in
             switch result {
             case .success(let artSearchResultModel):
-                let cellViewModels = [SearchResultCell.ViewModel()]
-                let viewModel = SearchView.ViewModel(state: .tableViewLoading(cellViewModels: cellViewModels))
-                self.viewController.configure(with: viewModel)
                 self.searchResultHandler(artSearchResultModel)
             case .failure(let error): break
             }
@@ -67,49 +68,54 @@ extension SearchPresenter: SearchPresentable {
     }
     
     
+    
     private func searchResultHandler(_ artSearchResultModel: ArtSearchResultsModel) {
+        updateViewWithLoadingCell()
+        
         artIDsToRetrieve = artSearchResultModel.remoteArtsIDs
-        retriveArtsFromIDs(artIDsToRetrieve)
-//        retrieveArtUseCases.retrieve(artRemoteID: 1) { result in
-//            switch result {
-//            case .success(let artModel):
-//                self.artModels.append(artModel)
-////                let count = self.positionsMap.count + 1
-////                self.positionsMap[artModel.remoteID] = count
-//                let cellViewModel = SearchResultCell.ViewModel(artTitle: artModel.title, artPeriod: artModel.period, coverPath: "")
-//                let viewModel = SearchView.ViewModel(state: .updateListItem(items: [(0, cellViewModel)]))
-//                self.viewController.configure(with: viewModel)
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
+        banchOfIDsToRetrieve = artIDsToRetrieve.chunked(into: fetchBanchLimite)
+        
+        if let ids = banchOfIDsToRetrieve.first {
+            banchOfIDsToRetrieve.removeFirst()
+            retriveArtsFromIDs(ids)
+        }
+    }
+    
+    private func updateViewWithLoadingCell() {
+        let cellViewModels = [SearchResultCell.ViewModel()]
+        let viewModel = SearchView.ViewModel(state: .tableViewLoading(cellViewModels: cellViewModels))
+        self.viewController.configure(with: viewModel)
     }
     
     private func retriveArtsFromIDs(_ ids: [Int]) {
-        var count = 0
         for id in ids {
-            if count  >= 20 { break }
-            count += 1
             retriveArtsFromID(id)
         }
     }
     
     private func retriveArtsFromID(_ id: Int) {
         retrieveArtUseCases.retrieve(artRemoteID: id) { [weak self] result in
+            guard let `self` = self else { return }
             switch result {
             case .success(let artModel):
-                self?.incrementArtModels(artModel: artModel)
+                self.artModels.append(artModel)
+                
+                let cellViewModel = SearchResultCell.ViewModel(
+                    artTitle: artModel.title,
+                    artPeriod: artModel.period,
+                    coverPath: artModel.primaryImageSmall
+                )
+                
+                self.cellViewModels.append(cellViewModel)
+                let index = self.cellViewModels.count - 1
+                let viewModel = SearchView.ViewModel(state: .updateListItem(index: index, cellViewModels: self.cellViewModels))
                 print("____________________________________________________________________________________")
-                print(self?.artModels.count ?? -1000)
+                print(self.artModels.count ?? -1000)
                 print("____________________________________________________________________________________")
             case .failure(let error):
                 break
             }
         }
-    }
-    
-    private func incrementArtModels(artModel: ArtModel) {
-        artModels.append(artModel)
     }
     
     private func cellTapped(with cellViewModel: SearchResultCell.ViewModel) {
@@ -129,23 +135,23 @@ extension SearchPresenter: SearchPresentable {
 extension SearchView {
     struct ViewModel {
         let shouldClearTableView: Bool
+        let indexToUpdate: Int?
         let cellViewModels: [SearchResultCell.ViewModel]?
-        let updatableItems: [(position: Int, cellViewModel: SearchResultCell.ViewModel)]?
         
         init(state: State) {
             switch state {
             case .clearLastSearchResult:
                 shouldClearTableView = true
                 cellViewModels = nil
-                updatableItems = nil
+                indexToUpdate = nil
             case .tableViewLoading(let cellViewModels):
                 shouldClearTableView = false
                 self.cellViewModels = cellViewModels
-                updatableItems = nil
-            case .updateListItem(let updatableItems):
+                indexToUpdate = nil
+            case .updateListItem(let indexToUpdate, let cellViewModels):
                 shouldClearTableView = false
-                cellViewModels = nil
-                self.updatableItems = updatableItems
+                self.cellViewModels = cellViewModels
+                self.indexToUpdate = indexToUpdate
             }
         }
     }
@@ -155,6 +161,14 @@ extension SearchView.ViewModel {
     enum State {
         case clearLastSearchResult
         case tableViewLoading(cellViewModels: [SearchResultCell.ViewModel])
-        case updateListItem(items: [(position: Int, cellViewModel: SearchResultCell.ViewModel)])
+        case updateListItem(index: Int, cellViewModels: [SearchResultCell.ViewModel])
+    }
+}
+
+extension Array {
+    func chunked(into size: Int) -> [[Element]] {
+        return stride(from: 0, to: count, by: size).map {
+            Array(self[$0 ..< Swift.min($0 + size, count)])
+        }
     }
 }

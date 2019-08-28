@@ -59,21 +59,27 @@ extension SearchView: ViewConfigurable {
             tableView.reloadData()
         }
         
-        if let itemsToUpdate = viewModel.updatableItems {
-            for item in itemsToUpdate {
+        if let indexToUpdate = viewModel.indexToUpdate {
+            let indexPath = IndexPath(row: indexToUpdate, section: 0)
+            tableView.beginUpdates()
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+            tableView.endUpdates()
+        }
+//        if let itemsToUpdate = viewModel.updatableItems {
+//            for item in itemsToUpdate {
 //                item.position
 //                item.viewModel
                 
-                cellsViewModels.remove(at: item.position)
-                cellsViewModels.insert(item.cellViewModel, at: item.position)
-                tableView.beginUpdates()
-                let indexPath = IndexPath.init(row: item.position, section: 0)
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-                tableView.endUpdates()
-            }
+//                cellsViewModels.remove(at: item.position)
+//                cellsViewModels.insert(item.cellViewModel, at: item.position)
+//                tableView.beginUpdates()
+//                let indexPath = IndexPath.init(row: item.position, section: 0)
+//                tableView.reloadRows(at: [indexPath], with: .automatic)
+//                tableView.endUpdates()
+//            }
 //            cellsViewModels = viewModel.searchResultCellsViewModels
 //            tableView.reloadData()
-        }
+//        }
     }
 }
 
