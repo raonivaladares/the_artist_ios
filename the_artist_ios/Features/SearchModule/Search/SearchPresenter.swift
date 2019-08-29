@@ -70,19 +70,24 @@ extension SearchPresenter: SearchPresentable {
     
     
     private func searchResultHandler(_ artSearchResultModel: ArtSearchResultsModel) {
-        updateViewWithLoadingCell()
-        
         artIDsToRetrieve = artSearchResultModel.remoteArtsIDs
         banchOfIDsToRetrieve = artIDsToRetrieve.chunked(into: fetchBanchLimite)
         
         if let ids = banchOfIDsToRetrieve.first {
+            updateViewWithLoadingCell(quantity: ids.count)
             banchOfIDsToRetrieve.removeFirst()
             retriveArtsFromIDs(ids)
         }
     }
     
-    private func updateViewWithLoadingCell() {
-        let cellViewModels = [SearchResultCell.ViewModel()]
+    private func updateViewWithLoadingCell(quantity: Int) {
+        var cellViewModels: [SearchResultCell.ViewModel] = []
+        cellViewModels.reserveCapacity(quantity)
+        
+        for _ in 0 ..< quantity {
+            cellViewModels.append(SearchResultCell.ViewModel())
+        }
+        
         let viewModel = SearchView.ViewModel(state: .tableViewLoading(cellViewModels: cellViewModels))
         self.viewController.configure(with: viewModel)
     }
@@ -109,6 +114,7 @@ extension SearchPresenter: SearchPresentable {
                 self.cellViewModels.append(cellViewModel)
                 let index = self.cellViewModels.count - 1
                 let viewModel = SearchView.ViewModel(state: .updateListItem(index: index, cellViewModels: self.cellViewModels))
+                self.viewController.configure(with: viewModel)
                 print("____________________________________________________________________________________")
                 print(self.artModels.count ?? -1000)
                 print("____________________________________________________________________________________")
@@ -119,15 +125,7 @@ extension SearchPresenter: SearchPresentable {
     }
     
     private func cellTapped(with cellViewModel: SearchResultCell.ViewModel) {
-        let artModel = ArtModel(
-            remoteID: 1,
-            title: "Stub",
-            objectTypeName: "Stub",
-            period: "Stub",
-            culture: "Stub",
-            primaryImage: "Stub",
-            primaryImageSmall: "Stub"
-        )
+        let artModel = artModels.filter { $0.title == cellViewModel.artTitle }.first!
         router.pushArtDetails(with: artModel)
     }
 }
