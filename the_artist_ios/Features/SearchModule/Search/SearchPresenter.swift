@@ -119,7 +119,7 @@ extension SearchPresenter: SearchPresentable {
                     self.viewController.configure(with: viewModel)
                 }
                 print("____________________________________________________________________________________")
-                print(self.artModels.count ?? -1000)
+                print(self.artModels.count)
                 print("____________________________________________________________________________________")
             case .failure(let error):
                 break
