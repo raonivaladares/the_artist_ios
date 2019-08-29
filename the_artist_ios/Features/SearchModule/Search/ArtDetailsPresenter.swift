@@ -11,9 +11,10 @@ final class ArtDetailsPresenter {
         self.viewController = viewController
         
         let viewModel = ArtDetailsView.ViewModel(
-            artTitleText: "Stub Title",
-            artPerieodText: "Stub Period",
-            artDescriptionText: "Stub Description"
+            artTitleText: artModel.title,
+            artPerieodText: artModel.period,
+            artDescriptionText: "API Stub Description",
+            coverImageURL: URL(string: artModel.primaryImage)
         )
         
         viewController.configure(with: viewModel)

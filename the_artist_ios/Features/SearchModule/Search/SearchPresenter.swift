@@ -112,9 +112,12 @@ extension SearchPresenter: SearchPresentable {
                 )
                 
                 self.cellViewModels.append(cellViewModel)
-                let index = self.cellViewModels.count - 1
-                let viewModel = SearchView.ViewModel(state: .updateListItem(index: index, cellViewModels: self.cellViewModels))
-                self.viewController.configure(with: viewModel)
+                
+                DispatchQueue.main.async {
+                    let index = self.cellViewModels.count - 1
+                    let viewModel = SearchView.ViewModel(state: .updateListItem(index: index, cellViewModels: self.cellViewModels))
+                    self.viewController.configure(with: viewModel)
+                }
                 print("____________________________________________________________________________________")
                 print(self.artModels.count ?? -1000)
                 print("____________________________________________________________________________________")
@@ -127,39 +130,6 @@ extension SearchPresenter: SearchPresentable {
     private func cellTapped(with cellViewModel: SearchResultCell.ViewModel) {
         let artModel = artModels.filter { $0.title == cellViewModel.artTitle }.first!
         router.pushArtDetails(with: artModel)
-    }
-}
-
-extension SearchView {
-    struct ViewModel {
-        let shouldClearTableView: Bool
-        let indexToUpdate: Int?
-        let cellViewModels: [SearchResultCell.ViewModel]?
-        
-        init(state: State) {
-            switch state {
-            case .clearLastSearchResult:
-                shouldClearTableView = true
-                cellViewModels = nil
-                indexToUpdate = nil
-            case .tableViewLoading(let cellViewModels):
-                shouldClearTableView = false
-                self.cellViewModels = cellViewModels
-                indexToUpdate = nil
-            case .updateListItem(let indexToUpdate, let cellViewModels):
-                shouldClearTableView = false
-                self.cellViewModels = cellViewModels
-                self.indexToUpdate = indexToUpdate
-            }
-        }
-    }
-}
-
-extension SearchView.ViewModel {
-    enum State {
-        case clearLastSearchResult
-        case tableViewLoading(cellViewModels: [SearchResultCell.ViewModel])
-        case updateListItem(index: Int, cellViewModels: [SearchResultCell.ViewModel])
     }
 }
 

@@ -47,6 +47,7 @@
 		FE356EB6231084D500FA5392 /* SearchArtUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE356EB5231084D500FA5392 /* SearchArtUseCases.swift */; };
 		FE4F3E032306DB8B0064DE1A /* AppStartupRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4F3E022306DB8B0064DE1A /* AppStartupRouter.swift */; };
 		FE4F3E052306E0FC0064DE1A /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE4F3E042306E0FC0064DE1A /* WelcomeView.swift */; };
+		FE6CB98423181AD600DC7809 /* SearchView+ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE6CB98323181AD600DC7809 /* SearchView+ViewModel.swift */; };
 		FE85A36F230B2C6C00B91A5A /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE85A36E230B2C6C00B91A5A /* SearchView.swift */; };
 		FE85A371230D68A400B91A5A /* ArtDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE85A370230D68A400B91A5A /* ArtDetailsView.swift */; };
 		FE85A373230D68F600B91A5A /* ArtDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE85A372230D68F600B91A5A /* ArtDetailsViewController.swift */; };
@@ -116,6 +117,7 @@
 		FE356EB5231084D500FA5392 /* SearchArtUseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchArtUseCases.swift; sourceTree = "<group>"; };
 		FE4F3E022306DB8B0064DE1A /* AppStartupRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartupRouter.swift; sourceTree = "<group>"; };
 		FE4F3E042306E0FC0064DE1A /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		FE6CB98323181AD600DC7809 /* SearchView+ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchView+ViewModel.swift"; sourceTree = "<group>"; };
 		FE85A36E230B2C6C00B91A5A /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		FE85A370230D68A400B91A5A /* ArtDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArtDetailsView.swift; path = the_artist_ios/Features/SearchModule/Search/ArtDetailsView.swift; sourceTree = SOURCE_ROOT; };
 		FE85A372230D68F600B91A5A /* ArtDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ArtDetailsViewController.swift; path = the_artist_ios/Features/SearchModule/Search/ArtDetailsViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -274,12 +276,11 @@
 		84A10E5D23063A3B00A1BDF6 /* Search */ = {
 			isa = PBXGroup;
 			children = (
-				8486E175230B6A3F00155A83 /* Cells */,
+				FE6CB98223181AB400DC7809 /* SearchView */,
 				8486E16B230A218900155A83 /* SearchAssembler.swift */,
 				8486E16D230A220A00155A83 /* SearchViewController.swift */,
 				8486E16F230A225500155A83 /* SearchRouter.swift */,
 				8486E171230A22D200155A83 /* SearchPresenter.swift */,
-				FE85A36E230B2C6C00B91A5A /* SearchView.swift */,
 				8486E173230B639D00155A83 /* ViewOutput.swift */,
 			);
 			path = Search;
@@ -385,6 +386,16 @@
 				8486E18623135A0100155A83 /* ArtSearchResultsModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		FE6CB98223181AB400DC7809 /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				8486E175230B6A3F00155A83 /* Cells */,
+				FE85A36E230B2C6C00B91A5A /* SearchView.swift */,
+				FE6CB98323181AD600DC7809 /* SearchView+ViewModel.swift */,
+			);
+			path = SearchView;
 			sourceTree = "<group>";
 		};
 		FEA7FC212306ECE10098664E /* Frameworks */ = {
@@ -587,6 +598,7 @@
 				FE85A371230D68A400B91A5A /* ArtDetailsView.swift in Sources */,
 				FE356EA1231066E500FA5392 /* RequestBuilder.swift in Sources */,
 				FE356E99231041A300FA5392 /* ArtModel.swift in Sources */,
+				FE6CB98423181AD600DC7809 /* SearchView+ViewModel.swift in Sources */,
 				8486E170230A225500155A83 /* SearchRouter.swift in Sources */,
 				FE356EAF2310744700FA5392 /* RetrieveArtWebService.swift in Sources */,
 				FEA7FC2F2306FD610098664E /* UIView+AddSubviews.swift in Sources */,
