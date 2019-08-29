@@ -1,5 +1,5 @@
 github "SnapKit/SnapKit"
 github "Alamofire/Alamofire" "5.0.0-beta.5"
-github "Alamofire/AlamofireImage"
+github "onevcat/Kingfisher"
 github "Quick/Quick"
 github "Quick/Nimble"

@@ -1,4 +1,5 @@
 import UIKit
+import Kingfisher
 
 final class ArtDetailsView: UIView {
     
@@ -78,6 +79,10 @@ extension ArtDetailsView: ViewConfigurable {
         artTitleLabel.text = viewModel.artTitleText
         artPerieodLabel.text = viewModel.artPerieodText
         artDescriptionLabel.text = viewModel.artDescriptionText
+        
+        if let url = viewModel.coverImageURL {
+            artImageView.kf.setImage(with: url)
+        }
     }
 }
 
