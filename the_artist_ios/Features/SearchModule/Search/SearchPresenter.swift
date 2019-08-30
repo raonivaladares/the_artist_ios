@@ -107,8 +107,8 @@ extension SearchPresenter: SearchPresentable {
                 
                 let cellViewModel = SearchResultCell.ViewModel(
                     artTitle: artModel.title,
-                    artPeriod: artModel.period,
-                    coverPath: artModel.primaryImageSmall
+                    artCompletionYear: artModel.artCreationDate,
+                    artImageURL: URL(string: artModel.primaryImageSmall)
                 )
                 
                 self.cellViewModels.append(cellViewModel)

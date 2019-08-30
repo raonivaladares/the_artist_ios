@@ -281,7 +281,6 @@
 				8486E16D230A220A00155A83 /* SearchViewController.swift */,
 				8486E16F230A225500155A83 /* SearchRouter.swift */,
 				8486E171230A22D200155A83 /* SearchPresenter.swift */,
-				8486E173230B639D00155A83 /* ViewOutput.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -300,6 +299,7 @@
 		FE356E91231029E800FA5392 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				8486E173230B639D00155A83 /* ViewOutput.swift */,
 				FE356E9223102A3000FA5392 /* ReusableIdentifier.swift */,
 			);
 			path = Protocols;

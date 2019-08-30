@@ -1,24 +1,26 @@
+import Foundation
+
 extension SearchResultCell {
     struct ViewModel {
         let isLoading: Bool
         let artTitle: String
-        let artPeriod: String
-        let coverPath: String
+        let artCompletionYear: String
+        let artImageURL: URL?
 //        let positionAtTableView: Int
         
         //TODO: Refactor init to have more context when it is loading
         init() {
             self.isLoading = true
-            artTitle = "Stub artTitle loading"
-            artPeriod = "Stub  artPeriod loading"
-            coverPath = "Stub  coverPath loading"
+            artTitle = "Loading"
+            artCompletionYear = "Loading"
+            artImageURL = nil
         }
         
-        init (artTitle: String, artPeriod: String, coverPath: String) {
+        init (artTitle: String, artCompletionYear: String, artImageURL: URL?) {
             isLoading = false
             self.artTitle = artTitle
-            self.artPeriod = artPeriod
-            self.coverPath = coverPath
+            self.artCompletionYear = artCompletionYear
+            self.artImageURL = artImageURL
         }
     }
 }

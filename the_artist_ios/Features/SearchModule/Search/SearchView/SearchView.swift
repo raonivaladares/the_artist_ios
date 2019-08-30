@@ -61,25 +61,11 @@ extension SearchView: ViewConfigurable {
         
         if let indexToUpdate = viewModel.indexToUpdate {
             let indexPath = IndexPath(row: indexToUpdate, section: 0)
-            tableView.beginUpdates()
-            tableView.reloadRows(at: [indexPath], with: .automatic)
-            tableView.endUpdates()
+            let tableView = self.tableView
+            tableView.performBatchUpdates({
+                tableView.reloadRows(at: [indexPath], with: .automatic)
+            })
         }
-//        if let itemsToUpdate = viewModel.updatableItems {
-//            for item in itemsToUpdate {
-//                item.position
-//                item.viewModel
-                
-//                cellsViewModels.remove(at: item.position)
-//                cellsViewModels.insert(item.cellViewModel, at: item.position)
-//                tableView.beginUpdates()
-//                let indexPath = IndexPath.init(row: item.position, section: 0)
-//                tableView.reloadRows(at: [indexPath], with: .automatic)
-//                tableView.endUpdates()
-//            }
-//            cellsViewModels = viewModel.searchResultCellsViewModels
-//            tableView.reloadData()
-//        }
     }
 }
 
@@ -167,7 +153,6 @@ extension SearchView: UITableViewDataSource {
         let cellViewModel = cellsViewModels[indexPath.row]
         outputHandler?(.cellTapped(content: cellViewModel))
     }
-    
 }
 
 // MARK: UITableViewDelegate

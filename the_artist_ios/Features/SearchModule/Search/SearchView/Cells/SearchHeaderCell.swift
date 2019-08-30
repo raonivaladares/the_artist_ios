@@ -49,7 +49,7 @@ extension SearchHeaderCell {
         searchTextField.backgroundColor = .white
         searchTextField.placeholder = "Type any movie here!"
         searchTextField.font = UIFont(name: "OpenSans-Semibold", size: 15)
-        searchTextField.setSidePaddingPoints(5)
+        searchTextField.setSidePaddingPoints(15)
         searchTextField.layer.cornerRadius = 5
         searchTextField.autocorrectionType = .no
         searchTextField.addTarget(self, action: #selector(textFieldEditingDidChange(_:)), for: .editingChanged)

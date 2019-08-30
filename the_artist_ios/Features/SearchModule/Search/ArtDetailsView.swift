@@ -26,7 +26,8 @@ final class ArtDetailsView: UIView {
     
     private let artImageView: UIImageView = {
         let coverImageView = UIImageView()
-        coverImageView.backgroundColor = .red
+        coverImageView.backgroundColor = UIColor(red: 191/255, green: 144/255, blue: 15/255, alpha: 1)
+        
         return coverImageView
     }()
     
@@ -34,19 +35,22 @@ final class ArtDetailsView: UIView {
         let label = UILabel()
         label.textColor = UIColor.AppColors.black
         label.font = UIFont(name: "OpenSans-Bold", size: 21)
+        label.numberOfLines = 0
+        label.textAlignment = .center
         
         return label
     }()
     
-    private let artPerieodLabel: UILabel = {
+    private let artCreationDateLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.AppColors.black
         label.font = UIFont(name: "OpenSans", size: 18)
+        label.textAlignment = .center
         
         return label
     }()
     
-    private let artDescriptionLabel: UILabel = {
+    private let artDimensionsLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.AppColors.black
         label.font = UIFont(name: "OpenSans", size: 22)
@@ -77,8 +81,8 @@ final class ArtDetailsView: UIView {
 extension ArtDetailsView: ViewConfigurable {
     func configure(with viewModel: ViewModel) {
         artTitleLabel.text = viewModel.artTitleText
-        artPerieodLabel.text = viewModel.artPerieodText
-        artDescriptionLabel.text = viewModel.artDescriptionText
+        artCreationDateLabel.text = viewModel.artCreationDateText
+        artDimensionsLabel.text = viewModel.artDimenssionsText
         
         if let url = viewModel.coverImageURL {
             artImageView.kf.setImage(with: url)
@@ -96,8 +100,8 @@ extension ArtDetailsView {
         
         contentView.addSubviews(artImageView)
         contentView.addSubviews(artTitleLabel)
-        contentView.addSubviews(artPerieodLabel)
-        contentView.addSubviews(artDescriptionLabel)
+        contentView.addSubviews(artCreationDateLabel)
+        contentView.addSubviews(artDimensionsLabel)
     }
     
     func defineAndActivateConstraints() {
@@ -120,21 +124,21 @@ extension ArtDetailsView {
         
         artTitleLabel.snp.makeConstraints {
             $0.top.equalTo(artImageView.snp.bottom).offset(20)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
         
-        artPerieodLabel.snp.makeConstraints {
+        artCreationDateLabel.snp.makeConstraints {
             $0.top.equalTo(artTitleLabel.snp.bottom).offset(20)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
         }
         
-        artDescriptionLabel.snp.makeConstraints {
-            $0.top.equalTo(artPerieodLabel.snp.bottom).offset(20)
-            $0.leading.equalToSuperview()
+        artDimensionsLabel.snp.makeConstraints {
+            $0.top.equalTo(artCreationDateLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
             $0.bottom.lessThanOrEqualTo(contentView.snp.bottom)
-            $0.trailing.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-20)
         }
     }
 }

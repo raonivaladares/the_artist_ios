@@ -6,7 +6,7 @@ final class SearchResultCell: UITableViewCell {
     
     private let coverImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.backgroundColor = UIColor.init(red: 191/255, green: 144/255, blue: 15/255, alpha: 1)
+        imageView.backgroundColor = UIColor(red: 191/255, green: 144/255, blue: 15/255, alpha: 1)
         imageView.layer.cornerRadius = 10
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -31,7 +31,7 @@ final class SearchResultCell: UITableViewCell {
         return label
     }()
     
-    private let artPeriodLabel: UILabel = {
+    private let artCompletionYearLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.AppColors.black
         label.font = UIFont(name: "OpenSans", size: 15)
@@ -57,12 +57,17 @@ final class SearchResultCell: UITableViewCell {
     
     func configure(with viewModel: ViewModel) {
         artNameLabel.text = viewModel.artTitle
-        artPeriodLabel.text = viewModel.artPeriod
+        artCompletionYearLabel.text = viewModel.artCompletionYear
         
-//        if let stringPath = content.movieCoverPath,
-//            let url = URL(string: stringPath) {
-//            coverImageView.load(fromURL: url)
-//        }
+        if let url = viewModel.artImageURL {
+            coverImageView.kf.setImage(with: url)
+        }
+    }
+    
+    override func prepareForReuse() {
+        coverImageView.image = nil
+        artNameLabel.text = nil
+        artCompletionYearLabel.text = nil
     }
 }
 
@@ -74,7 +79,7 @@ extension SearchResultCell {
         contentView.addSubview(stackView)
         
         stackView.addArrangedSubview(artNameLabel)
-        stackView.addArrangedSubview(artPeriodLabel)
+        stackView.addArrangedSubview(artCompletionYearLabel)
     }
     
     private func defineAndActivateConstraints() {

@@ -12,8 +12,8 @@ final class ArtDetailsPresenter {
         
         let viewModel = ArtDetailsView.ViewModel(
             artTitleText: artModel.title,
-            artPerieodText: artModel.period,
-            artDescriptionText: "API Stub Description",
+            artCreationDateText: artModel.artCreationDate,
+            artDimenssionsText: artModel.dimensions,
             coverImageURL: URL(string: artModel.primaryImage)
         )
         
