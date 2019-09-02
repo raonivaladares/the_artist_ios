@@ -5,6 +5,7 @@ extension ArtDetailsView {
         let artTitleText: String
         let artCreationDateText: String
         let artDimenssionsText: String
+        let artistDisplayName: String
         let coverImageURL: URL?
     }
 }

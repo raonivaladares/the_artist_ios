@@ -3,6 +3,7 @@ struct ArtModel {
     let title: String
     let objectTypeName: String
     let artCreationDate: String
+    let artistDisplayName: String
     let dimensions: String
     let culture: String
     
@@ -17,6 +18,7 @@ extension ArtModel: Decodable {
         case objectTypeName = "objectName"
         case dimensions = "dimensions"
         case artCreationDate = "objectDate"
+        case artistDisplayName = "artistDisplayName"
         case culture = "culture"
         case primaryImage = "primaryImage"
         case primaryImageSmall = "primaryImageSmall"

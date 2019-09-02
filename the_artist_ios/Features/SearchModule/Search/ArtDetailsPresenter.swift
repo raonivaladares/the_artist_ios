@@ -14,6 +14,7 @@ final class ArtDetailsPresenter {
             artTitleText: artModel.title,
             artCreationDateText: artModel.artCreationDate,
             artDimenssionsText: artModel.dimensions,
+            artistDisplayName: artModel.artistDisplayName,
             coverImageURL: URL(string: artModel.primaryImage)
         )
         

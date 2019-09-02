@@ -53,7 +53,34 @@ final class ArtDetailsView: UIView {
     private let artDimensionsLabel: UILabel = {
         let label = UILabel()
         label.textColor = UIColor.AppColors.black
+        label.font = UIFont(name: "OpenSans-Bold", size: 18)
+        label.text = "Dimensions:"
+        
+        return label
+    }()
+    
+    private let artDimensionsValueLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.AppColors.black
         label.font = UIFont(name: "OpenSans", size: 22)
+        label.numberOfLines = 2
+        
+        return label
+    }()
+    
+    private let artistLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.AppColors.black
+        label.font = UIFont(name: "OpenSans-Bold", size: 18)
+        label.text = "Artist:"
+        
+        return label
+    }()
+    
+    private let artistValueLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.AppColors.black
+        label.font = UIFont(name: "OpenSans", size: 18)
         
         return label
     }()
@@ -82,7 +109,8 @@ extension ArtDetailsView: ViewConfigurable {
     func configure(with viewModel: ViewModel) {
         artTitleLabel.text = viewModel.artTitleText
         artCreationDateLabel.text = viewModel.artCreationDateText
-        artDimensionsLabel.text = viewModel.artDimenssionsText
+        artDimensionsValueLabel.text = viewModel.artDimenssionsText
+        artistValueLabel.text = viewModel.artistDisplayName
         
         if let url = viewModel.coverImageURL {
             artImageView.kf.setImage(with: url)
@@ -102,6 +130,9 @@ extension ArtDetailsView {
         contentView.addSubviews(artTitleLabel)
         contentView.addSubviews(artCreationDateLabel)
         contentView.addSubviews(artDimensionsLabel)
+        contentView.addSubviews(artDimensionsValueLabel)
+        contentView.addSubviews(artistLabel)
+        contentView.addSubviews(artistValueLabel)
     }
     
     func defineAndActivateConstraints() {
@@ -137,7 +168,25 @@ extension ArtDetailsView {
         artDimensionsLabel.snp.makeConstraints {
             $0.top.equalTo(artCreationDateLabel.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
-            $0.bottom.lessThanOrEqualTo(contentView.snp.bottom)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        artDimensionsValueLabel.snp.makeConstraints {
+            $0.top.equalTo(artDimensionsLabel.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        artistLabel.snp.makeConstraints {
+            $0.top.equalTo(artDimensionsValueLabel.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalToSuperview().offset(-20)
+        }
+        
+        artistValueLabel.snp.makeConstraints {
+            $0.top.equalTo(artistLabel.snp.bottom).offset(10)
+            $0.leading.equalToSuperview().offset(20)
+            $0.bottom.lessThanOrEqualTo(contentView.snp.bottom).offset(-20)
             $0.trailing.equalToSuperview().offset(-20)
         }
     }
