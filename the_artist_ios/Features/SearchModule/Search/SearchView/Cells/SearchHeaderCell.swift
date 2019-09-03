@@ -40,7 +40,7 @@ extension SearchHeaderCell: UITextFieldDelegate {
 
 extension SearchHeaderCell {
     private func configureUIElements() {
-        descriptionLabel.text = "Wich art are you looking for?"
+        descriptionLabel.text = "Which art are you looking for?"
         descriptionLabel.font = UIFont(name: "OpenSans-Extrabold", size: 23)
         descriptionLabel.numberOfLines = 3
         

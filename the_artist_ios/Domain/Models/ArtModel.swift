@@ -6,7 +6,6 @@ struct ArtModel {
     let artistDisplayName: String
     let dimensions: String
     let culture: String
-    
     let primaryImage: String
     let primaryImageSmall: String
 }

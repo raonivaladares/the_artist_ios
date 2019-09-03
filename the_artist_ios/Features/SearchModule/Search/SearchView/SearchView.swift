@@ -106,11 +106,11 @@ extension SearchView {
     private func registerTableViewElements() {
         tableView.register(
             SearchHeaderCell.self,
-            forHeaderFooterViewReuseIdentifier: "SearchHeaderCell"
+            forHeaderFooterViewReuseIdentifier: SearchHeaderCell.reuseIdentifier
         )
         tableView.register(
             SearchResultCell.self,
-            forCellReuseIdentifier: "SearchResultCell"
+            forCellReuseIdentifier: SearchResultCell.reuseIdentifier
         )
     }
 }

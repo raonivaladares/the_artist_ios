@@ -24,7 +24,3 @@ extension SearchArtUseCasesImp: SearchArtUseCases {
         }
     }
 }
-
-enum ApplicationError: Error {
-    case unkown
-}
