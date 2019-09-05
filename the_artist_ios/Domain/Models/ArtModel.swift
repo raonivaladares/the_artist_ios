@@ -10,7 +10,7 @@ struct ArtModel {
     let primaryImageSmall: String
 }
 
-extension ArtModel: Decodable {
+extension ArtModel: Codable {
     private enum CodingKeys : String, CodingKey {
         case remoteID = "objectID"
         case title = "title"
