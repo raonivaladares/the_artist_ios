@@ -1,6 +1,12 @@
 import Foundation
 
-final class RetrieveArtWebService {
+protocol RetrieveArtWebService {
+    func retrieveArt(
+        withID artRemoteID: Int,
+        completion: @escaping (Result<ArtModel, ApplicationError>) -> Void)
+}
+
+final class RetrieveArtWebServiceImp: RetrieveArtWebService {
     private let configuration: WebServiceConfiguration
     private let requestExecuter: RequestExecuter
     

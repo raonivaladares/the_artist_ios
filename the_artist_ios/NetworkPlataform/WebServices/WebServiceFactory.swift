@@ -12,7 +12,7 @@ final class WebServiceFactory {
     func createRetrieveArtWebService() -> RetrieveArtWebService {
         let configuration = TheMETWebServiceConfiguration()
         let requestExecuter = AlamofireRequestExecuter()
-        let webService = RetrieveArtWebService(configuration: configuration, requestExecuter: requestExecuter)
+        let webService = RetrieveArtWebServiceImp(configuration: configuration, requestExecuter: requestExecuter)
         
         return webService
     }

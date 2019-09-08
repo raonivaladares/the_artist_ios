@@ -6,32 +6,51 @@ import Nimble
 final class RecoverArtUseCasesSpecs: QuickSpec {
     override func spec() {
         describe("RecoverArtUseCases") {
-            describe("retrieve(artRemoteID") {
-                context("retrieve at should succeed") {
+            describe("retrieve(artRemoteID: Int)") {
+                let stubID = -11
+                context("success") {
                     //Given
-                    let robot = RetrieveArtUseCasesRobot()
+                    let webServiceMock = RetrieveArtWebServiceMock()
                     let artModel = ArtModelStubFactory().createArtModel()
+                    webServiceMock.expectedResult = .success(artModel: artModel)
+                    let useCases = RetrieveArtUseCasesImp(retrieveArtWebService: webServiceMock)
+                    
+                    var resultArtModel: ArtModel?
                     
                     //When
-                    robot.configureResult(expectedResult: .success(artModel: artModel))
-                    robot.retriveArt()
-                    it("???") {
-                        //Them
-                        robot.isTestSucceed()
+                    useCases.retrieve(artRemoteID: stubID) { result in
+                        if case let .success(artModel) = result {
+                            resultArtModel = artModel
+                        }
+                    }
+
+                    //Them
+                    it("verifies if request succeed with a model as result") {
+                        expect(resultArtModel).toEventually(equal(artModel))
+                    }
+                    
+                    it("verifies if webservice was called only once") {
+                        expect(webServiceMock.retrieveArtInvocations).to(equal(1))
                     }
                 }
                 
-                context("retrieve at should fail with X error") {
+                context("failure with ApplicationError.unkown") {
                     //Given
-                    let robot = RetrieveArtUseCasesRobot()
-                    let error = ApplicationError.unkown
+                    let webServiceMock = RetrieveArtWebServiceMock()
+                    webServiceMock.expectedResult = .failure(error: ApplicationError.unkown)
+                    let useCases = RetrieveArtUseCasesImp(retrieveArtWebService: webServiceMock)
+                    var resultError: ApplicationError?
                     
                     //When
-                    robot.configureResult(expectedResult: .failure(error: error))
-                    robot.retriveArt()
-                    it("?????") {
-                        //Them
-//                        expect(robot.isTestSucceed()).to(beTrue())
+                    useCases.retrieve(artRemoteID: stubID) { result in
+                        if case let .failure(error) = result {
+                            resultError = error
+                        }
+                    }
+                    
+                    //Them
+                    it("verifies if request failed with an error ApplicationError.unkown") {
+                        expect(resultError).toEventually(equal(ApplicationError.unkown))
                     }
                 }
             }
@@ -39,63 +58,44 @@ final class RecoverArtUseCasesSpecs: QuickSpec {
     }
 }
 
-final class RetrieveArtUseCasesRobot {
+final class RetrieveArtWebServiceMock: RetrieveArtWebService {
     enum ExpectedResult {
         case success(artModel: ArtModel)
         case failure(error: ApplicationError)
     }
     
-    private var useCases: RetrieveArtUseCases
-    private var expectedResult: ExpectedResult?
+    var expectedResult: ExpectedResult?
+    var retrieveArtInvocations = 0
     
-    //
-    private var artModel: ArtModel?
-    private var error: Error?
-    
-    private let requestExecuter: TestRequestExecuter
-    
-    init() {
-        let configuration = TestAPIConfiguration()
+    func retrieveArt(
+        withID artRemoteID: Int,
+        completion: @escaping (Result<ArtModel, ApplicationError>) -> Void) {
         
-        requestExecuter = TestRequestExecuter()
+        retrieveArtInvocations += 1
         
-        let webService = RetrieveArtWebService(configuration: configuration, requestExecuter: requestExecuter)
-        useCases = RetrieveArtUseCasesImp(retrieveArtWebService: webService)
-    }
-    
-    func configureResult(expectedResult: ExpectedResult) {
+        guard let expectedResult = expectedResult else { return }
+        
         switch expectedResult {
         case .success(let artModel):
-            let jsonEncoder = JSONEncoder()
-            let data = try! jsonEncoder.encode(artModel)
-            requestExecuter.expectedResult = .success(artModel: data)
+            completion(.success(artModel))
         case .failure(let error):
-            requestExecuter.expectedResult = .failure(error: error)
-        }
-        
-        self.expectedResult = expectedResult
-    }
-    
-    func retriveArt() {
-        let notImportantID = -11
-        useCases.retrieve(artRemoteID: notImportantID) { result in
-            switch result {
-            case .success(let artModel):
-                self.artModel = artModel
-            case .failure(let error):
-                self.error = error
-            }
+            completion(.failure(error))
         }
     }
-    
-    func isTestSucceed() -> Bool {
-        return false
-    }
-    
-    private func compareWithExpectedResult() -> Bool {
-        guard let expectedResult = expectedResult else { return false }
-        
-        return false
+}
+
+extension ArtModel: Equatable {
+    public static func ==(lhs: ArtModel, rhs: ArtModel) -> Bool {
+        return
+            lhs.remoteID == rhs.remoteID &&
+            lhs.title == rhs.title &&
+            lhs.objectTypeName == rhs.objectTypeName &&
+            lhs.artCreationDate == rhs.artCreationDate &&
+            lhs.artistDisplayName == rhs.artistDisplayName &&
+            lhs.dimensions == rhs.dimensions &&
+            lhs.culture == rhs.culture &&
+            lhs.primaryImage == rhs.primaryImage &&
+            lhs.primaryImageSmall == rhs.primaryImageSmall
     }
 }
 
@@ -112,29 +112,5 @@ final class ArtModelStubFactory {
             primaryImage: "",
             primaryImageSmall: ""
         )
-    }
-}
-
-struct TestAPIConfiguration: WebServiceConfiguration {
-    var apiBaseURL: URL = URL(string: "stub_api_url")!
-}
-
-final class TestRequestExecuter: RequestExecuter {
-    enum ExpectedResult {
-        case success(artModel: Data)
-        case failure(error: ApplicationError)
-    }
-    
-    var expectedResult: ExpectedResult?
-    
-    func execute(request: Requestable, completion: @escaping (Result<Data, ApplicationError>) -> Void) {
-        guard let expectedResult = expectedResult else { return }
-        
-        switch expectedResult {
-        case .success(let data):
-            completion(.success(data))
-        case .failure(let error):
-            completion(.failure(error))
-        }
     }
 }
