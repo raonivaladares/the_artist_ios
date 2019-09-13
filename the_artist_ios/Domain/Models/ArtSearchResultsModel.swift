@@ -3,9 +3,11 @@ struct ArtSearchResultsModel {
     let remoteArtsIDs: [Int]
 }
 
-extension ArtSearchResultsModel: Decodable {
-    private enum CodingKeys : String, CodingKey {
-        case totalArtsCount = "total"
-        case remoteArtsIDs = "objectIDs"
+extension ArtSearchResultsModelNetwork {
+    func asDomain() -> ArtSearchResultsModel {
+        return ArtSearchResultsModel(
+            totalArtsCount: self.totalArtsCount,
+            remoteArtsIDs: self.remoteArtsIDs ?? []
+        )
     }
 }

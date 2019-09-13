@@ -70,7 +70,7 @@ extension SearchPresenter: SearchPresentable {
     
     
     private func searchResultHandler(_ artSearchResultModel: ArtSearchResultsModel) {
-        artIDsToRetrieve = artSearchResultModel.remoteArtsIDs
+        artIDsToRetrieve = artSearchResultModel.remoteArtsIDs ?? []
         banchOfIDsToRetrieve = artIDsToRetrieve.chunked(into: fetchBanchLimite)
         
         if let ids = banchOfIDsToRetrieve.first {
@@ -101,6 +101,7 @@ extension SearchPresenter: SearchPresentable {
     private func retriveArtsFromID(_ id: Int) {
         retrieveArtUseCases.retrieve(artRemoteID: id) { [weak self] result in
             guard let `self` = self else { return }
+            
             switch result {
             case .success(let artModel):
                 self.artModels.append(artModel)

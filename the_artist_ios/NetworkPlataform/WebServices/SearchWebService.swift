@@ -9,7 +9,7 @@ final class SearchArtWebService {
         self.requestExecuter = requestExecuter
     }
     
-    func search(query: String, completion: @escaping (Result<ArtSearchResultsModel, ApplicationError>) -> Void) {
+    func search(query: String, completion: @escaping (Result<ArtSearchResultsModelNetwork, ApplicationError>) -> Void) {
         let parameters = ["q": query]
         let request = RequestBuilder(
             action: APIAction.SearchArt(),
@@ -22,10 +22,14 @@ final class SearchArtWebService {
             switch result {
             case .success(let data):
                 let decoder = JSONDecoder()
-                let foo = try? decoder.decode(ArtSearchResultsModel.self, from: data)
-                completion(.success(foo!))
+                let artSearchResultsModelNetwork = try? decoder.decode(ArtSearchResultsModelNetwork.self, from: data)
+                if let artSearchResultsModelNetwork = artSearchResultsModelNetwork {
+                    completion(.success(artSearchResultsModelNetwork))
+                } else {
+                    completion(.failure(.unkown))
+                }
             case .failure(let error):
-                break
+                completion(.failure(error))
             }
         }
     }
