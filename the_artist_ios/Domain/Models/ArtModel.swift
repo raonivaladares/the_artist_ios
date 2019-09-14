@@ -10,16 +10,18 @@ struct ArtModel {
     let primaryImageSmall: String
 }
 
-extension ArtModel: Codable {
-    private enum CodingKeys : String, CodingKey {
-        case remoteID = "objectID"
-        case title = "title"
-        case objectTypeName = "objectName"
-        case dimensions = "dimensions"
-        case artCreationDate = "objectDate"
-        case artistDisplayName = "artistDisplayName"
-        case culture = "culture"
-        case primaryImage = "primaryImage"
-        case primaryImageSmall = "primaryImageSmall"
+extension ArtModelNetwork {
+    func asDomain() -> ArtModel {
+        return ArtModel(
+            remoteID: remoteID,
+            title: title,
+            objectTypeName: objectTypeName,
+            artCreationDate: artCreationDate,
+            artistDisplayName: artistDisplayName,
+            dimensions: dimensions,
+            culture: culture,
+            primaryImage: primaryImage,
+            primaryImageSmall: primaryImageSmall
+        )
     }
 }

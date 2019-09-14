@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8421FCA4232D5F2E00AD1FD6 /* ArtModelNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421FCA3232D5F2E00AD1FD6 /* ArtModelNetwork.swift */; };
 		84531145232558E1003B8236 /* RetrieveArtWebServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84531144232558E1003B8236 /* RetrieveArtWebServiceMock.swift */; };
 		845311482325593C003B8236 /* ArtModel+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845311472325593B003B8236 /* ArtModel+Equatable.swift */; };
 		8453114A23258AA2003B8236 /* ArtModel+EquatableSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453114923258AA2003B8236 /* ArtModel+EquatableSpecs.swift */; };
@@ -82,6 +83,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8421FCA3232D5F2E00AD1FD6 /* ArtModelNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtModelNetwork.swift; sourceTree = "<group>"; };
 		84531144232558E1003B8236 /* RetrieveArtWebServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrieveArtWebServiceMock.swift; sourceTree = "<group>"; };
 		845311472325593B003B8236 /* ArtModel+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArtModel+Equatable.swift"; sourceTree = "<group>"; };
 		8453114923258AA2003B8236 /* ArtModel+EquatableSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArtModel+EquatableSpecs.swift"; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				84BEA898232B27850047DB9A /* ArtSearchResultsModelNetwork.swift */,
+				8421FCA3232D5F2E00AD1FD6 /* ArtModelNetwork.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -699,6 +702,7 @@
 				8486E1852311BFC000155A83 /* ArtDetailsView+ViewModel.swift in Sources */,
 				84A10E252306321B00A1BDF6 /* AppDelegate.swift in Sources */,
 				84A10E5B230639B200A1BDF6 /* WelcomeViewController.swift in Sources */,
+				8421FCA4232D5F2E00AD1FD6 /* ArtModelNetwork.swift in Sources */,
 				FE356EA62310675800FA5392 /* APIConfiguration.swift in Sources */,
 				8486E174230B639D00155A83 /* ViewOutput.swift in Sources */,
 				FE85A375230D693C00B91A5A /* ArtDetailsAssembler.swift in Sources */,

@@ -3,7 +3,7 @@ import Foundation
 protocol RetrieveArtWebService {
     func retrieveArt(
         withID artRemoteID: Int,
-        completion: @escaping (Result<ArtModel, ApplicationError>) -> Void)
+        completion: @escaping (Result<ArtModelNetwork, ApplicationError>) -> Void)
 }
 
 final class RetrieveArtWebServiceImp: RetrieveArtWebService {
@@ -17,7 +17,7 @@ final class RetrieveArtWebServiceImp: RetrieveArtWebService {
     
     func retrieveArt(
         withID artRemoteID: Int,
-        completion: @escaping (Result<ArtModel, ApplicationError>) -> Void) {
+        completion: @escaping (Result<ArtModelNetwork, ApplicationError>) -> Void) {
         
         let request = RequestBuilder(
             action: APIAction.RetrieveArt(artRemoteID: artRemoteID),
@@ -30,8 +30,8 @@ final class RetrieveArtWebServiceImp: RetrieveArtWebService {
             case .success(let data):
                 let decoder = JSONDecoder()
                 //TODO: exceptions?
-                if let artModel = try? decoder.decode(ArtModel.self, from: data) {
-                    completion(.success(artModel))
+                if let artModelNetwork = try? decoder.decode(ArtModelNetwork.self, from: data) {
+                    completion(.success(artModelNetwork))
                 }
                 completion(.failure(.unkown))
             case .failure(let error):
