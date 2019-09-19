@@ -2,7 +2,7 @@
 
 final class RetrieveArtWebServiceMock: RetrieveArtWebService {
     enum ExpectedResult {
-        case success(artModel: ArtModel)
+        case success(artModel: ArtModelNetwork)
         case failure(error: ApplicationError)
     }
     
@@ -11,15 +11,15 @@ final class RetrieveArtWebServiceMock: RetrieveArtWebService {
     
     func retrieveArt(
         withID artRemoteID: Int,
-        completion: @escaping (Result<ArtModel, ApplicationError>) -> Void) {
+        completion: @escaping (Result<ArtModelNetwork, ApplicationError>) -> Void) {
         
         retrieveArtInvocations += 1
         
         guard let expectedResult = expectedResult else { return }
         
         switch expectedResult {
-        case .success(let artModel):
-            completion(.success(artModel))
+        case .success(let artModelNetwork):
+            completion(.success(artModelNetwork))
         case .failure(let error):
             completion(.failure(error))
         }

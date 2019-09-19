@@ -21,7 +21,7 @@ final class RecoverArtUseCasesSpecs: QuickSpec {
                     var resultArtModel: ArtModel?
                     
                     beforeEach {
-                        webServiceMock.expectedResult = .success(artModel: artModel)
+                        webServiceMock.expectedResult = .success(artModel: artModel.asNetwork())
                         useCases.retrieve(artRemoteID: stubID) { result in
                             if case let .success(artModel) = result {
                                 resultArtModel = artModel
@@ -60,5 +60,21 @@ final class RecoverArtUseCasesSpecs: QuickSpec {
                 }
             }
         }
+    }
+}
+
+extension ArtModel {
+    func asNetwork() -> ArtModelNetwork {
+        return ArtModelNetwork(
+            remoteID: remoteID,
+            title: title,
+            objectTypeName: objectTypeName,
+            artCreationDate: artCreationDate,
+            artistDisplayName: artistDisplayName,
+            dimensions: dimensions,
+            culture: culture,
+            primaryImage: primaryImage,
+            primaryImageSmall: primaryImageSmall
+        )
     }
 }

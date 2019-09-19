@@ -54,18 +54,8 @@ extension SearchView: ViewOutput {
 
 extension SearchView: ViewConfigurable {
     func configure(with viewModel: ViewModel) {
-        if let cellsViewModels = viewModel.cellViewModels {
-            self.cellsViewModels = cellsViewModels
-            tableView.reloadData()
-        }
-        
-        if let indexToUpdate = viewModel.indexToUpdate {
-            let indexPath = IndexPath(row: indexToUpdate, section: 0)
-            let tableView = self.tableView
-            tableView.performBatchUpdates({
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-            })
-        }
+        cellsViewModels = viewModel.cellsViewModels
+        tableView.reloadData()
     }
 }
 

@@ -24,4 +24,8 @@ extension RetrieveArtUseCasesImp: RetrieveArtUseCases {
             }
         }
     }
+    
+    func retrieve(artRemoteIDs ids: [Int], completion: @escaping (Result<[ArtModel], ApplicationError>) -> Void) {
+        
+    }
 }

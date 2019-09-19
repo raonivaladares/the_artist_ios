@@ -1,23 +1,16 @@
 extension SearchView {
     struct ViewModel {
-        let shouldClearTableView: Bool
-        let indexToUpdate: Int?
-        let cellViewModels: [SearchResultCell.ViewModel]?
+        let isNoResultsLabelVisible: Bool
+        let cellsViewModels: [SearchResultCell.ViewModel]
         
         init(state: State) {
             switch state {
-            case .clearLastSearchResult:
-                shouldClearTableView = true
-                cellViewModels = nil
-                indexToUpdate = nil
-            case .tableViewLoading(let cellViewModels):
-                shouldClearTableView = false
-                self.cellViewModels = cellViewModels
-                indexToUpdate = nil
-            case .updateListItem(let indexToUpdate, let cellViewModels):
-                shouldClearTableView = false
-                self.cellViewModels = cellViewModels
-                self.indexToUpdate = indexToUpdate
+            case .showContent(let cellsViewModels):
+                self.cellsViewModels = cellsViewModels
+                isNoResultsLabelVisible = false
+            case .noResultsState:
+                cellsViewModels = []
+                isNoResultsLabelVisible = true
             }
         }
     }
@@ -25,8 +18,7 @@ extension SearchView {
 
 extension SearchView.ViewModel {
     enum State {
-        case clearLastSearchResult
-        case tableViewLoading(cellViewModels: [SearchResultCell.ViewModel])
-        case updateListItem(index: Int, cellViewModels: [SearchResultCell.ViewModel])
+        case noResultsState
+        case showContent(cellsViewModels: [SearchResultCell.ViewModel])
     }
 }

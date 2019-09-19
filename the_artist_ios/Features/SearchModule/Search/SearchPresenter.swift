@@ -53,7 +53,7 @@ extension SearchPresenter: SearchPresentable {
         artModels = []
         cellViewModels = []
         banchOfIDsToRetrieve = []
-        let viewModel = SearchView.ViewModel(state: .clearLastSearchResult)
+        let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: []))
         viewController.configure(with: viewModel)
     }
     
@@ -74,21 +74,21 @@ extension SearchPresenter: SearchPresentable {
         banchOfIDsToRetrieve = artIDsToRetrieve.chunked(into: fetchBanchLimite)
         
         if let ids = banchOfIDsToRetrieve.first {
-            updateViewWithLoadingCell(quantity: ids.count)
+            updateViewWithLoadingCell()
             banchOfIDsToRetrieve.removeFirst()
             retriveArtsFromIDs(ids)
         }
     }
     
-    private func updateViewWithLoadingCell(quantity: Int) {
-        var cellViewModels: [SearchResultCell.ViewModel] = []
-        cellViewModels.reserveCapacity(quantity)
+    private func updateViewWithLoadingCell() {
+        var cellViewModels: [SearchResultCell.ViewModel] = [SearchResultCell.ViewModel()]
+//        cellViewModels.reserveCapacity(quantity)
         
-        for _ in 0 ..< quantity {
-            cellViewModels.append(SearchResultCell.ViewModel())
-        }
+//        for _ in 0 ..< quantity {
+//            cellViewModels.append(SearchResultCell.ViewModel())
+//        }
         
-        let viewModel = SearchView.ViewModel(state: .tableViewLoading(cellViewModels: cellViewModels))
+        let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
         self.viewController.configure(with: viewModel)
     }
     
@@ -111,12 +111,12 @@ extension SearchPresenter: SearchPresentable {
                     artCompletionYear: artModel.artCreationDate,
                     artImageURL: URL(string: artModel.primaryImageSmall)
                 )
-                
+                print("Art object type: \(artModel.objectTypeName)")
                 self.cellViewModels.append(cellViewModel)
                 
                 DispatchQueue.main.async {
                     let index = self.cellViewModels.count - 1
-                    let viewModel = SearchView.ViewModel(state: .updateListItem(index: index, cellViewModels: self.cellViewModels))
+                    let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: self.cellViewModels))
                     self.viewController.configure(with: viewModel)
                 }
                 print("____________________________________________________________________________________")
