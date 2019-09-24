@@ -1,7 +1,7 @@
 import Foundation
 
 protocol RetrieveArtUseCases {
-    func retrieve(artRemoteID id: Int, completion: @escaping (Result<ArtModel, ApplicationError>) -> Void)
+    func retrieve(artRemoteIDs ids: [Int], completion: @escaping (Result<[ArtModel], ApplicationError>) -> Void)
 }
 
 final class RetrieveArtUseCasesImp {
@@ -13,19 +13,32 @@ final class RetrieveArtUseCasesImp {
 }
 
 extension RetrieveArtUseCasesImp: RetrieveArtUseCases {
-    func retrieve(artRemoteID id: Int, completion: @escaping (Result<ArtModel, ApplicationError>) -> Void) {
-        retrieveArtWebService.retrieveArt(withID: id) { result in
-            switch result {
-            case .success(let artModelNetwork):
-                let artModel = artModelNetwork.asDomain()
-                completion(.success(artModel))
-            case .failure(let error):
-                completion(.failure(error))
+    func retrieve(artRemoteIDs ids: [Int], completion: @escaping (Result<[ArtModel], ApplicationError>) -> Void) {
+        var artModels: [ArtModel] = []
+                
+        for (index, id) in ids.enumerated() {
+            let isLastID = index == ids.count - 1
+            
+            retrieveArtWebService.retrieveArt(withID: id) { result in
+                if let artModel = self.handleRetriveResult(result: result),
+                    artModel.objectTypeName == "Painting" {
+                    artModels.append(artModel)
+                }
+                
+                if isLastID {
+                    completion(.success(artModels))
+                }
             }
         }
     }
     
-    func retrieve(artRemoteIDs ids: [Int], completion: @escaping (Result<[ArtModel], ApplicationError>) -> Void) {
-        
+    private func handleRetriveResult(result: Result<ArtModelNetwork, ApplicationError>) -> ArtModel? {
+        switch result {
+        case .success(let artModelNetwork):
+            let artModel = artModelNetwork.asDomain()
+            return artModel
+        case .failure(let error):
+            return nil
+        }
     }
 }

@@ -82,40 +82,29 @@ extension SearchPresenter: SearchPresentable {
     
     private func updateViewWithLoadingCell() {
         var cellViewModels: [SearchResultCell.ViewModel] = [SearchResultCell.ViewModel()]
-//        cellViewModels.reserveCapacity(quantity)
-        
-//        for _ in 0 ..< quantity {
-//            cellViewModels.append(SearchResultCell.ViewModel())
-//        }
-        
+
         let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
         self.viewController.configure(with: viewModel)
     }
     
     private func retriveArtsFromIDs(_ ids: [Int]) {
-        for id in ids {
-            retriveArtsFromID(id)
-        }
-    }
-    
-    private func retriveArtsFromID(_ id: Int) {
-        retrieveArtUseCases.retrieve(artRemoteID: id) { [weak self] result in
+        retrieveArtUseCases.retrieve(artRemoteIDs: ids) { [weak self] result in
             guard let `self` = self else { return }
             
             switch result {
-            case .success(let artModel):
-                self.artModels.append(artModel)
+            case .success(let artModels):
+                self.artModels.append(contentsOf: artModels)
                 
-                let cellViewModel = SearchResultCell.ViewModel(
-                    artTitle: artModel.title,
-                    artCompletionYear: artModel.artCreationDate,
-                    artImageURL: URL(string: artModel.primaryImageSmall)
-                )
-                print("Art object type: \(artModel.objectTypeName)")
-                self.cellViewModels.append(cellViewModel)
+                for artModel in artModels {
+                    let cellViewModel = SearchResultCell.ViewModel(
+                        artTitle: artModel.title,
+                        artCompletionYear: artModel.artCreationDate,
+                        artImageURL: URL(string: artModel.primaryImageSmall)
+                    )
+                    self.cellViewModels.append(cellViewModel)
+                }
                 
                 DispatchQueue.main.async {
-                    let index = self.cellViewModels.count - 1
                     let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: self.cellViewModels))
                     self.viewController.configure(with: viewModel)
                 }
@@ -126,6 +115,10 @@ extension SearchPresenter: SearchPresentable {
                 break
             }
         }
+    }
+    
+    private func retriveArtsFromID(_ id: Int) {
+        
     }
     
     private func cellTapped(with cellViewModel: SearchResultCell.ViewModel) {
