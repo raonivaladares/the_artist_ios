@@ -33,7 +33,8 @@ extension RetrieveArtUseCasesImp: RetrieveArtUseCases {
         }
         
         retrieveDispatchGroup.notify(queue: DispatchQueue.main) {
-          completion(artModels)
+            let filteredArtModels = self.filterForPaintings(artModels: artModels)
+            completion(filteredArtModels)
         }
     }
     
