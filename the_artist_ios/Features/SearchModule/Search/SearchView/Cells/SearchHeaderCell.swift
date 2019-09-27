@@ -38,6 +38,8 @@ extension SearchHeaderCell: UITextFieldDelegate {
     }
 }
 
+// MARK: Private methods - UI
+
 extension SearchHeaderCell {
     private func configureUIElements() {
         descriptionLabel.text = "Which art are you looking for?"
@@ -52,7 +54,10 @@ extension SearchHeaderCell {
         searchTextField.setSidePaddingPoints(15)
         searchTextField.layer.cornerRadius = 5
         searchTextField.autocorrectionType = .no
-        searchTextField.addTarget(self, action: #selector(textFieldEditingDidChange(_:)), for: .editingChanged)
+        searchTextField.addTarget(
+            self,
+            action: #selector(textFieldEditingDidChange(_:)), for: .editingChanged
+        )
         searchTextField.delegate = self
     }
     
@@ -84,5 +89,7 @@ extension SearchHeaderCell {
         }
     }
 }
+
+// MARK: ReusableIdentifier
 
 extension SearchHeaderCell: ReusableIdentifier {}

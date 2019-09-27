@@ -32,8 +32,9 @@ final class RetrieveArtWebServiceImp: RetrieveArtWebService {
                 //TODO: exceptions?
                 if let artModelNetwork = try? decoder.decode(ArtModelNetwork.self, from: data) {
                     completion(.success(artModelNetwork))
+                } else {
+                    completion(.failure((.unkown)))
                 }
-                completion(.failure(.unkown))
             case .failure(let error):
                 completion(.failure(.unkown))
             }

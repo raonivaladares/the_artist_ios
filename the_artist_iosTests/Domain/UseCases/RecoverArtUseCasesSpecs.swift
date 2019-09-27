@@ -22,37 +22,14 @@ final class RecoverArtUseCasesSpecs: QuickSpec {
                     
                     beforeEach {
                         webServiceMock.expectedResult = .success(artModel: artModel.asNetwork())
-                        useCases.retrieve(artRemoteIDs: [stubID]) { result in
-                            if case let .success(artModel) = result {
-                                resultArtModel = artModel[0]
-                            }
+                        useCases.retrieve(artRemoteIDs: [stubID]) { artModels in
+                            resultArtModel = artModels.first!
                         }
                     }
                     
                     it("verifies if request succeed with a model as result") {
                         expect(resultArtModel).toEventually(equal(artModel))
                     }
-                    
-                    it("verifies if webservice was called only once") {
-                        expect(webServiceMock.retrieveArtInvocations).to(equal(1))
-                    }
-                }
-                
-                context("failure with ApplicationError.unkown") {
-                    var resultError: ApplicationError?
-                    
-                    beforeEach {
-                        webServiceMock.expectedResult = .failure(error: ApplicationError.unkown)
-                        useCases.retrieve(artRemoteIDs: [stubID]) { result in
-                            if case let .failure(error) = result {
-                                resultError = error
-                            }
-                        }
-                    }
-                    
-//                    it("verifies if request failed with an error ApplicationError.unkown") {
-//                        expect(resultError).toEventually(equal(ApplicationError.unkown))
-//                    }
                     
                     it("verifies if webservice was called only once") {
                         expect(webServiceMock.retrieveArtInvocations).to(equal(1))
