@@ -8,20 +8,24 @@ final class RecoverArtUseCasesSpecs: QuickSpec {
         describe("RecoverArtUseCases") {
             var webServiceMock: RetrieveArtWebServiceMock!
             var useCases: RetrieveArtUseCases!
+            let artPaintingFilter = ArtPaintingFilter()
             
             beforeEach {
                 webServiceMock = RetrieveArtWebServiceMock()
-                useCases = RetrieveArtUseCasesImp(retrieveArtWebService: webServiceMock)
+                useCases = RetrieveArtUseCasesImp(
+                    artPaintingFilter: artPaintingFilter,
+                    retrieveArtWebService: webServiceMock)
             }
             
             describe("retrieve(artRemoteID: Int)") {
                 let stubID = -11
                 context("success") {
-                    let artModel = ArtModelStubFactory().createAnEmptyArtModel()
+                    let artModel = ArtModelStubFactory().createAnStubPaintingArtModel()
                     var resultArtModel: ArtModel?
                     
                     beforeEach {
-                        webServiceMock.expectedResult = .success(artModel: artModel.asNetwork())
+                        let artModelNetwork = artModel.asNetworkModel()
+                        webServiceMock.expectedResult = .success(artModel: artModelNetwork)
                         useCases.retrieve(artRemoteIDs: [stubID]) { artModels in
                             resultArtModel = artModels.first!
                         }
@@ -37,21 +41,5 @@ final class RecoverArtUseCasesSpecs: QuickSpec {
                 }
             }
         }
-    }
-}
-
-extension ArtModel {
-    func asNetwork() -> ArtModelNetwork {
-        return ArtModelNetwork(
-            remoteID: remoteID,
-            title: title,
-            objectTypeName: objectTypeName,
-            artCreationDate: artCreationDate,
-            artistDisplayName: artistDisplayName,
-            dimensions: dimensions,
-            culture: culture,
-            primaryImage: primaryImage,
-            primaryImageSmall: primaryImageSmall
-        )
     }
 }

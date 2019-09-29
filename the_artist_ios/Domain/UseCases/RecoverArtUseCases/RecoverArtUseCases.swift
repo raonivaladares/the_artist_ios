@@ -5,12 +5,18 @@ protocol RetrieveArtUseCases {
 }
 
 final class RetrieveArtUseCasesImp {
+    private let artPaintingFilter: ArtPaintingFilter
     private let retrieveArtWebService: RetrieveArtWebService
     
-    init(retrieveArtWebService: RetrieveArtWebService) {
+    init(artPaintingFilter: ArtPaintingFilter,
+         retrieveArtWebService: RetrieveArtWebService) {
+        
+        self.artPaintingFilter = artPaintingFilter
         self.retrieveArtWebService = retrieveArtWebService
     }
 }
+
+// MARK: RetrieveArtUseCases
 
 extension RetrieveArtUseCasesImp: RetrieveArtUseCases {
     func retrieve(artRemoteIDs ids: [Int], completion: @escaping ([ArtModel]) -> Void) {
@@ -33,13 +39,9 @@ extension RetrieveArtUseCasesImp: RetrieveArtUseCases {
         }
         
         retrieveDispatchGroup.notify(queue: DispatchQueue.main) {
-            let filteredArtModels = self.filterForPaintings(artModels: artModels)
+            let filteredArtModels = self.artPaintingFilter.filter(artModels: artModels)
             completion(filteredArtModels)
         }
-    }
-    
-    private func filterForPaintings(artModels: [ArtModel]) -> [ArtModel] {
-        return artModels.filter { $0.objectTypeName == "Painting"}
     }
     
     private func handleRetriveResult(result: Result<ArtModelNetwork, ApplicationError>) -> ArtModel? {

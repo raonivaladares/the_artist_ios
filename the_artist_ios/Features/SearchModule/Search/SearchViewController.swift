@@ -23,6 +23,14 @@ extension SearchViewController {
 // MARK: Override methods - life-cycle
 
 extension SearchViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

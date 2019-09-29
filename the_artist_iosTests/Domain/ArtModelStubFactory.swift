@@ -1,17 +1,31 @@
 @testable import the_artist_ios
 
 final class ArtModelStubFactory {
-    func createAnEmptyArtModel() -> ArtModel {
+    func createAnStubPaintingArtModel() -> ArtModel {
         return ArtModel(
             remoteID: -1,
-            title: "",
-            objectTypeName: "",
-            artCreationDate: "",
-            artistDisplayName: "",
-            dimensions: "",
-            culture: "",
-            primaryImage: "",
-            primaryImageSmall: ""
+            title: "Stub",
+            objectTypeName: "Painting",
+            artCreationDate: "Stub",
+            artistDisplayName: "Stub",
+            dimensions: "Stub",
+            culture: "Stub",
+            primaryImage: "Stub",
+            primaryImageSmall: "Stub"
+        )
+    }
+    
+    func createAnStubOtherArtModel() -> ArtModel {
+        return ArtModel(
+            remoteID: -1,
+            title: "Stub",
+            objectTypeName: "Other",
+            artCreationDate: "Stub",
+            artistDisplayName: "Stub",
+            dimensions: "Stub",
+            culture: "Stub",
+            primaryImage: "Stub",
+            primaryImageSmall: "Stub"
         )
     }
     

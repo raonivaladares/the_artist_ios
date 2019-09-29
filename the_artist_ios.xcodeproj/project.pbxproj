@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		841C56512340E4EF000B6D0E /* ArtPaintingFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C56502340E4EF000B6D0E /* ArtPaintingFilter.swift */; };
+		841C56532340E646000B6D0E /* ArtModel+AsNertorworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C56522340E646000B6D0E /* ArtModel+AsNertorworkModel.swift */; };
+		841C56572340F7D5000B6D0E /* ArtPaintingFilterSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C56562340F7D5000B6D0E /* ArtPaintingFilterSpecs.swift */; };
 		8421FCA4232D5F2E00AD1FD6 /* ArtModelNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421FCA3232D5F2E00AD1FD6 /* ArtModelNetwork.swift */; };
 		84531145232558E1003B8236 /* RetrieveArtWebServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84531144232558E1003B8236 /* RetrieveArtWebServiceMock.swift */; };
 		845311482325593C003B8236 /* ArtModel+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845311472325593B003B8236 /* ArtModel+Equatable.swift */; };
@@ -83,6 +86,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		841C56502340E4EF000B6D0E /* ArtPaintingFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtPaintingFilter.swift; sourceTree = "<group>"; };
+		841C56522340E646000B6D0E /* ArtModel+AsNertorworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArtModel+AsNertorworkModel.swift"; sourceTree = "<group>"; };
+		841C56562340F7D5000B6D0E /* ArtPaintingFilterSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtPaintingFilterSpecs.swift; sourceTree = "<group>"; };
 		8421FCA3232D5F2E00AD1FD6 /* ArtModelNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtModelNetwork.swift; sourceTree = "<group>"; };
 		84531144232558E1003B8236 /* RetrieveArtWebServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrieveArtWebServiceMock.swift; sourceTree = "<group>"; };
 		845311472325593B003B8236 /* ArtModel+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArtModel+Equatable.swift"; sourceTree = "<group>"; };
@@ -177,9 +183,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		841C564F2340E30C000B6D0E /* RecoverArtUseCases */ = {
+			isa = PBXGroup;
+			children = (
+				FE336E5A231412C1001A5482 /* RecoverArtUseCases.swift */,
+				841C56502340E4EF000B6D0E /* ArtPaintingFilter.swift */,
+			);
+			path = RecoverArtUseCases;
+			sourceTree = "<group>";
+		};
+		841C56542340EF0F000B6D0E /* RecoverArtUseCases */ = {
+			isa = PBXGroup;
+			children = (
+				841C56552340F76D000B6D0E /* Filters */,
+				84A6B26C231E00A300A7F2BE /* RecoverArtUseCasesSpecs.swift */,
+			);
+			path = RecoverArtUseCases;
+			sourceTree = "<group>";
+		};
+		841C56552340F76D000B6D0E /* Filters */ = {
+			isa = PBXGroup;
+			children = (
+				841C56562340F7D5000B6D0E /* ArtPaintingFilterSpecs.swift */,
+			);
+			path = Filters;
+			sourceTree = "<group>";
+		};
 		84531143232558D0003B8236 /* Util */ = {
 			isa = PBXGroup;
 			children = (
+				841C56522340E646000B6D0E /* ArtModel+AsNertorworkModel.swift */,
 				84531144232558E1003B8236 /* RetrieveArtWebServiceMock.swift */,
 			);
 			path = Util;
@@ -364,8 +397,8 @@
 		84A6B26B231E003F00A7F2BE /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				841C56542340EF0F000B6D0E /* RecoverArtUseCases */,
 				84531143232558D0003B8236 /* Util */,
-				84A6B26C231E00A300A7F2BE /* RecoverArtUseCasesSpecs.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -458,7 +491,7 @@
 			isa = PBXGroup;
 			children = (
 				FE356EB5231084D500FA5392 /* SearchArtUseCases.swift */,
-				FE336E5A231412C1001A5482 /* RecoverArtUseCases.swift */,
+				841C564F2340E30C000B6D0E /* RecoverArtUseCases */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -700,6 +733,7 @@
 				FE85A373230D68F600B91A5A /* ArtDetailsViewController.swift in Sources */,
 				FE356E90230EC64C00FA5392 /* SearchResultCell.swift in Sources */,
 				8486E1852311BFC000155A83 /* ArtDetailsView+ViewModel.swift in Sources */,
+				841C56512340E4EF000B6D0E /* ArtPaintingFilter.swift in Sources */,
 				84A10E252306321B00A1BDF6 /* AppDelegate.swift in Sources */,
 				84A10E5B230639B200A1BDF6 /* WelcomeViewController.swift in Sources */,
 				8421FCA4232D5F2E00AD1FD6 /* ArtModelNetwork.swift in Sources */,
@@ -733,8 +767,10 @@
 				84A10E3A2306321D00A1BDF6 /* the_artist_iosTests.swift in Sources */,
 				8453114C2326861E003B8236 /* ArtModelStubFactory.swift in Sources */,
 				845311482325593C003B8236 /* ArtModel+Equatable.swift in Sources */,
+				841C56572340F7D5000B6D0E /* ArtPaintingFilterSpecs.swift in Sources */,
 				8453114A23258AA2003B8236 /* ArtModel+EquatableSpecs.swift in Sources */,
 				84A6B26D231E00A300A7F2BE /* RecoverArtUseCasesSpecs.swift in Sources */,
+				841C56532340E646000B6D0E /* ArtModel+AsNertorworkModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

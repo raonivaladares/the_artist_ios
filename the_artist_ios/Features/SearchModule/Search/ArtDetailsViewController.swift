@@ -8,14 +8,23 @@ final class ArtDetailsViewController: UIViewController {
     var presenter: ArtDetailsPresenter?
 }
 
+// MARK: Override methods - life-cycle
+
+extension ArtDetailsViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        if #available(iOS 13.0, *) {
+            overrideUserInterfaceStyle = .light
+        }
+    }
+}
+
 // MARK: Override methods
 
 extension ArtDetailsViewController {
     override func loadView() {
         self.view = artDetailsView
-        
-//        let presenter = self.presenter
-//        view.outputHandler = { presenter?.viewOutputHandler(event: $0) }
     }
 }
 
