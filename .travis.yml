@@ -9,6 +9,9 @@ env:
   global:
     - FRAMEWORK_NAME=SnapKit.framework
     - FRAMEWORK_NAME=Alamofire.framework
+    - FRAMEWORK_NAME=Nimble.framework
+    - FRAMEWORK_NAME=Quick.framework
+    - FRAMEWORK_NAME=Kingfisher.framework
 before_install:
   - brew update
   - brew outdated carthage || brew upgrade carthage
