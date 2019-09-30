@@ -8,7 +8,7 @@ final class SearchRouter {
     }
 }
 
-// MARK: Public methods
+// MARK: - Public methods
 
 extension SearchRouter {
     func pushArtDetails(with artModel: ArtModel) {

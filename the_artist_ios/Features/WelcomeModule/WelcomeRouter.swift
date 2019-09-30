@@ -8,7 +8,6 @@ final class WelcomeRouter {
     }
     
     func presentSearch() {
-        
         let navigationControllerToPresent = UINavigationController()
         let viewController = SearchAssembler()
             .assemble(navigationController: navigationControllerToPresent)

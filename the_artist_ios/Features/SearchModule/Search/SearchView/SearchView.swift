@@ -20,6 +20,14 @@ final class SearchView: UIView {
         return tableView
     }()
     
+    private let emptySearchLabel: UILabel = {
+        let label = UILabel()
+        label.text = "There is no result for this search"
+        label.isHidden = true
+        
+        return label
+    }()
+    
     // MARK: Private properties
     
     private var cellsViewModels: [SearchResultCell.ViewModel] = []
@@ -44,22 +52,24 @@ final class SearchView: UIView {
     }
 }
 
-// MARK: ViewOutput
+// MARK: - ViewOutput
 
 extension SearchView: ViewOutput {
     typealias OutputHandler = (Event) -> Void
 }
 
-// MARK: ViewConfigurable
+// MARK: - ViewConfigurable
 
 extension SearchView: ViewConfigurable {
     func configure(with viewModel: ViewModel) {
         cellsViewModels = viewModel.cellsViewModels
         tableView.reloadData()
+        
+        emptySearchLabel.isHidden = viewModel.isEmptySearchHidden
     }
 }
 
-// MARK: Action handlers
+// MARK: - Action handlers
 
 extension SearchView {
     @objc private func search(_ text: String) {
@@ -67,11 +77,12 @@ extension SearchView {
     }
 }
 
-// MARK: Private methods
+// MARK: - Private methods
 
 extension SearchView {
     private func textFieldDidEndEditing(text: String?) {
         outputHandler?(.startTyping) //TODO: remove temp clean up
+        
         if let text = text,
             !text.isEmpty {
             NSObject.cancelPreviousPerformRequests(withTarget: self)
@@ -80,16 +91,23 @@ extension SearchView {
     }
 }
 
-// MARK: Private methods - UI
+// MARK: - Private methods - UI
 
 extension SearchView {
     private func addViews() {
-        addSubview(tableView)
+        addSubviews(
+            tableView,
+            emptySearchLabel
+        )
     }
     
     private func defineAndActivateConstraints() {
         tableView.snp.makeConstraints {
             $0.edges.equalTo(self.safeAreaLayoutGuide)
+        }
+        
+        emptySearchLabel.snp.makeConstraints {
+            $0.center.equalToSuperview()
         }
     }
     
@@ -105,7 +123,7 @@ extension SearchView {
     }
 }
 
-// MARK: UITableViewDataSource
+// MARK: - UITableViewDataSource
 
 extension SearchView: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -145,7 +163,7 @@ extension SearchView: UITableViewDataSource {
     }
 }
 
-// MARK: UITableViewDelegate
+// MARK: - UITableViewDelegate
 
 extension SearchView: UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {

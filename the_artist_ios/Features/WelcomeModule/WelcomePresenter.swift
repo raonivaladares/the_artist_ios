@@ -15,7 +15,7 @@ final class WelcomePresenter {
     }
 }
 
-// MARK: WelcomePresentable
+// MARK: - WelcomePresentable
 
 extension WelcomePresenter: WelcomePresentable {
     func viewOutputHandler(event: WelcomeView.Event) {

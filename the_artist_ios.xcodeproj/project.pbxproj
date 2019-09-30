@@ -10,6 +10,7 @@
 		841C56512340E4EF000B6D0E /* ArtPaintingFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C56502340E4EF000B6D0E /* ArtPaintingFilter.swift */; };
 		841C56532340E646000B6D0E /* ArtModel+AsNertorworkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C56522340E646000B6D0E /* ArtModel+AsNertorworkModel.swift */; };
 		841C56572340F7D5000B6D0E /* ArtPaintingFilterSpecs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C56562340F7D5000B6D0E /* ArtPaintingFilterSpecs.swift */; };
+		841C565923413295000B6D0E /* ViewConfigurable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841C565823413295000B6D0E /* ViewConfigurable.swift */; };
 		8421FCA4232D5F2E00AD1FD6 /* ArtModelNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8421FCA3232D5F2E00AD1FD6 /* ArtModelNetwork.swift */; };
 		84531145232558E1003B8236 /* RetrieveArtWebServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84531144232558E1003B8236 /* RetrieveArtWebServiceMock.swift */; };
 		845311482325593C003B8236 /* ArtModel+Equatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845311472325593B003B8236 /* ArtModel+Equatable.swift */; };
@@ -89,6 +90,7 @@
 		841C56502340E4EF000B6D0E /* ArtPaintingFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtPaintingFilter.swift; sourceTree = "<group>"; };
 		841C56522340E646000B6D0E /* ArtModel+AsNertorworkModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArtModel+AsNertorworkModel.swift"; sourceTree = "<group>"; };
 		841C56562340F7D5000B6D0E /* ArtPaintingFilterSpecs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtPaintingFilterSpecs.swift; sourceTree = "<group>"; };
+		841C565823413295000B6D0E /* ViewConfigurable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewConfigurable.swift; sourceTree = "<group>"; };
 		8421FCA3232D5F2E00AD1FD6 /* ArtModelNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtModelNetwork.swift; sourceTree = "<group>"; };
 		84531144232558E1003B8236 /* RetrieveArtWebServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RetrieveArtWebServiceMock.swift; sourceTree = "<group>"; };
 		845311472325593B003B8236 /* ArtModel+Equatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ArtModel+Equatable.swift"; sourceTree = "<group>"; };
@@ -349,6 +351,7 @@
 			children = (
 				84A10E5D23063A3B00A1BDF6 /* Search */,
 				84A10E5E23063A4600A1BDF6 /* Details */,
+				841C565823413295000B6D0E /* ViewConfigurable.swift */,
 			);
 			path = SearchModule;
 			sourceTree = "<group>";
@@ -734,6 +737,7 @@
 				FE356E90230EC64C00FA5392 /* SearchResultCell.swift in Sources */,
 				8486E1852311BFC000155A83 /* ArtDetailsView+ViewModel.swift in Sources */,
 				841C56512340E4EF000B6D0E /* ArtPaintingFilter.swift in Sources */,
+				841C565923413295000B6D0E /* ViewConfigurable.swift in Sources */,
 				84A10E252306321B00A1BDF6 /* AppDelegate.swift in Sources */,
 				84A10E5B230639B200A1BDF6 /* WelcomeViewController.swift in Sources */,
 				8421FCA4232D5F2E00AD1FD6 /* ArtModelNetwork.swift in Sources */,

@@ -1,16 +1,16 @@
 extension SearchView {
     struct ViewModel {
-        let isNoResultsLabelVisible: Bool
+        let isEmptySearchHidden: Bool
         let cellsViewModels: [SearchResultCell.ViewModel]
         
         init(state: State) {
             switch state {
             case .showContent(let cellsViewModels):
                 self.cellsViewModels = cellsViewModels
-                isNoResultsLabelVisible = false
+                isEmptySearchHidden = true
             case .noResultsState:
                 cellsViewModels = []
-                isNoResultsLabelVisible = true
+                isEmptySearchHidden = false
             }
         }
     }

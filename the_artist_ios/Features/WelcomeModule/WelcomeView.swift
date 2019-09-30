@@ -10,14 +10,14 @@ final class WelcomeView: UIView {
     
     // MARK: Private properties
     
-    let appLogoImageView: UIImageView = {
+    private let appLogoImageView: UIImageView = {
         let image = UIImage(named: "app_logo")
         let imageview = UIImageView(image: image)
         
         return imageview
     }()
     
-    let welcomeDescriptionLabel: UILabel = {
+    private let welcomeDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text =
         "The $79 iWork ’08 appears to be a good deal for anyone needing an affordable office suite for the Mac."
@@ -30,7 +30,7 @@ final class WelcomeView: UIView {
         return label
     }()
     
-    let actionButton: UIButton = {
+    private let actionButton: UIButton = {
         let button = UIButton()
         button.setTitle("START", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -42,14 +42,14 @@ final class WelcomeView: UIView {
         return button
     }()
     
-    let theMETLogoImageView: UIImageView = {
+    private let theMETLogoImageView: UIImageView = {
         let image = UIImage(named: "the_met_logo")
         let imageview = UIImageView(image: image)
         
         return imageview
     }()
     
-    let theMETThanksLabel: UILabel = {
+    private let theMETThanksLabel: UILabel = {
         let label = UILabel()
         label.text = "Thanks The MET for the content"
         label.textAlignment = .left
@@ -61,9 +61,9 @@ final class WelcomeView: UIView {
         return label
     }()
     
-    let centerContainerView = UIView()
+    private let centerContainerView = UIView()
     
-    let bottomContainerStackView: UIStackView = {
+    private let bottomContainerStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.spacing = 20
@@ -72,6 +72,7 @@ final class WelcomeView: UIView {
     }()
     
     // MARK: Public properties
+    
     typealias OutputHandler = (Event) -> Void
     
     var outputHandler: OutputHandler?
@@ -88,7 +89,7 @@ final class WelcomeView: UIView {
     }
 }
 
-// MARK: Action Handlers
+// MARK: - Action Handlers
 
 extension WelcomeView {
     @objc private func actionButtonHandler(_ sender: UIButton) {
