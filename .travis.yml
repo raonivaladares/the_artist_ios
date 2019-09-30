@@ -4,7 +4,7 @@ osx_image: xcode11
 xcode_project: the_artist_ios.xcodeproj
 # xcode_workspace: <WORKSPACE_PLACEHOLDER>
 xcode_scheme: the_artist_ios
-xcode_sdk: iphonesimulator13
+xcode_sdk: iphonesimulator13.0
 env:
   global:
     - FRAMEWORK_NAME=SnapKit.framework
