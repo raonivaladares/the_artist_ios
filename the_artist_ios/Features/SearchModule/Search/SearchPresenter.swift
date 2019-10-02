@@ -66,12 +66,17 @@ extension SearchPresenter: SearchPresentable {
         let fetchBanchLimite = 20
         let artIDsToRetrieve = artSearchResultModel.remoteArtsIDs
         
-        banchOfIDsToRetrieve = artIDsToRetrieve.chunked(into: fetchBanchLimite)
-        
-        if let ids = banchOfIDsToRetrieve.first {
-            updateViewWithLoadingCell()
-            banchOfIDsToRetrieve.removeFirst()
-            retriveArtsFromIDs(ids)
+        if artIDsToRetrieve.isEmpty {
+            let viewModel = SearchView.ViewModel(state: .noResultsState)
+            viewController.configure(with: viewModel)
+        } else {
+            banchOfIDsToRetrieve = artIDsToRetrieve.chunked(into: fetchBanchLimite)
+            
+            if let ids = banchOfIDsToRetrieve.first {
+                updateViewWithLoadingCell()
+                banchOfIDsToRetrieve.removeFirst()
+                retriveArtsFromIDs(ids)
+            }
         }
     }
     
@@ -86,23 +91,22 @@ extension SearchPresenter: SearchPresentable {
         retrieveArtUseCases.retrieve(artRemoteIDs: ids) { [weak self] artModels in
             guard let `self` = self else { return }
             
-            self.artModels.append(contentsOf: artModels)
-            print("BEGIN -----------------------------------------------------------------")
-            for artModel in artModels {
-                let cellViewModel = self.createCellViewModel(with: artModel)
-                self.cellViewModels.append(cellViewModel)
-            }
-            
-            print("-----------------------------------------------------------------")
-            print(self.cellViewModels)
-            print("-----------------------------------------------------------------")
-            print("END -----------------------------------------------------------------")
-//            DispatchQueue.main.async {
+            if self.artModels.isEmpty && artModels.isEmpty {
+                let viewModel = SearchView.ViewModel(state: .noResultsState)
+                self.viewController.configure(with: viewModel)
+            } else {
+                for artModel in artModels {
+                    let cellViewModel = self.createCellViewModel(with: artModel)
+                    self.cellViewModels.append(cellViewModel)
+                }
+                
+                self.artModels.append(contentsOf: artModels)
+                
                 let viewModel = SearchView.ViewModel(
                     state: .showContent(cellsViewModels: self.cellViewModels)
                 )
                 self.viewController.configure(with: viewModel)
-//            }
+            }
         }
     }
     
