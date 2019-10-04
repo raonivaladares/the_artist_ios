@@ -19,7 +19,7 @@ final class ArrayChunkedSpec: QuickSpec {
                     context("with array with 1 element") {
                         let arrayChunked = [1].chunked(into: 1)
                         
-                        it("") {
+                        it("returns an array of size 1") {
                             expect(arrayChunked.count).to(equal(1))
                             expect(arrayChunked[0]).to(equal([1]))
                         }
@@ -28,7 +28,7 @@ final class ArrayChunkedSpec: QuickSpec {
                     context("with array with 2 elements") {
                         let arrayChunked = [1, 2].chunked(into: 1)
                         
-                        it("") {
+                        it("returns an array of size 2") {
                             expect(arrayChunked.count).to(equal(2))
                             expect(arrayChunked[0]).to(equal([1]))
                             expect(arrayChunked[1]).to(equal([2]))
@@ -38,7 +38,7 @@ final class ArrayChunkedSpec: QuickSpec {
                     context("with array with 3 elements") {
                         let arrayChunked = [1, 2, 3].chunked(into: 1)
                         
-                        it("") {
+                        it("returns an array of size 3") {
                             expect(arrayChunked.count).to(equal(3))
                             expect(arrayChunked[0]).to(equal([1]))
                             expect(arrayChunked[1]).to(equal([2]))
@@ -57,11 +57,41 @@ final class ArrayChunkedSpec: QuickSpec {
                     }
                     
                     context("with array with 1 element") {
+                        let arrayChunked = [1].chunked(into: 2)
+                        
+                        it("returns an array of size 1") {
+                            expect(arrayChunked.count).to(equal(1))
+                            expect(arrayChunked[0]).to(equal([1]))
+                        }
+                    }
+                    
+                    context("with array with 2 element") {
                         let arrayChunked = [1, 2].chunked(into: 2)
                         
-                        it("") {
+                        it("returns an array of size 2") {
                             expect(arrayChunked.count).to(equal(1))
                             expect(arrayChunked[0]).to(equal([1, 2]))
+                        }
+                    }
+                    
+                    context("with array with 3 element") {
+                        let arrayChunked = [1, 2, 3].chunked(into: 2)
+                        
+                        it("returns an array of size 2") {
+                            expect(arrayChunked.count).to(equal(2))
+                            expect(arrayChunked[0]).to(equal([1, 2]))
+                            expect(arrayChunked[1]).to(equal([3]))
+                        }
+                    }
+                    
+                    context("with array with 5 element") {
+                        let arrayChunked = [1, 2, 3, 4, 5].chunked(into: 2)
+
+                        it("returns an array of size 3") {
+                            expect(arrayChunked.count).to(equal(3))
+                            expect(arrayChunked[0]).to(equal([1, 2]))
+                            expect(arrayChunked[1]).to(equal([3, 4]))
+                            expect(arrayChunked[2]).to(equal([5]))
                         }
                     }
                 } // chunking into fragments of 2
