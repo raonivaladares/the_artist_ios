@@ -49,24 +49,39 @@ extension SearchPresenter: SearchPresentable {
         if let lastViewModelCell = cellViewModels.last,
                lastViewModelCell.isLoading != true {
             
-            let loadingCellViewModel = SearchResultCell.ViewModel()
-            cellViewModels.append(loadingCellViewModel)
-            
-            let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
-            self.viewController.configure(with: viewModel)
-            
+            addLoadingView()
             let ids = retrieveNextIDsForFetch()
-            retrieveArtUseCases.retrieve(artRemoteIDs: ids) { [weak self] artModels in
-                guard let `self` =  self else { return }
-                
-                self.cellViewModels = self.cellViewModels.dropLast()
-                let newCellViewModels = artModels.map(self.createCellViewModel(with:))
-                self.cellViewModels.append(contentsOf: newCellViewModels)
-                
-                let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: self.cellViewModels))
-                self.viewController.configure(with: viewModel)
-            }
+            retriveArtsFromIDsFromLastElementsEvent(ids)
         }
+    }
+    
+    private func retriveArtsFromIDsFromLastElementsEvent(_ ids: [Int]) {
+        retrieveArtUseCases.retrieve(
+            artRemoteIDs: ids,
+            completion: { [weak self] in self?.retriveArtsFromIDsFooHandler(artModels: $0) }
+        )
+    }
+    
+    private func retriveArtsFromIDsFooHandler(artModels: [ArtModel]) {
+        self.artModels.append(contentsOf: artModels)
+        
+        removeLoadingFromCellViewModels()
+        createAndAppendCellViewModels(artModels: artModels)
+        updateContentFromViewController(cellViewModels: cellViewModels)
+    }
+    
+    private func updateContentFromViewController(cellViewModels: [SearchResultCell.ViewModel]) {
+        let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
+        self.viewController.configure(with: viewModel)
+    }
+    
+    private func removeLoadingFromCellViewModels() {
+        cellViewModels = cellViewModels.dropLast()
+    }
+    
+    private func createAndAppendCellViewModels(artModels: [ArtModel]) {
+        let newCellViewModels = artModels.map(createCellViewModel(with:))
+        cellViewModels.append(contentsOf: newCellViewModels)
     }
     
     private func retrieveNextIDsForFetch() -> [Int] {
@@ -76,7 +91,8 @@ extension SearchPresenter: SearchPresentable {
     
     private func addLoadingView() {
         let loadingCellViewModel = SearchResultCell.ViewModel()
-
+        cellViewModels.append(loadingCellViewModel)
+        
         let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
         self.viewController.configure(with: viewModel)
     }
@@ -113,7 +129,7 @@ extension SearchPresenter: SearchPresentable {
             if let ids = banchOfIDsToRetrieve.first {
                 updateViewWithLoadingCell()
                 banchOfIDsToRetrieve.removeFirst()
-                retriveArtsFromIDs(ids)
+                retriveArtsFromIDsFromSearch(ids)
             }
         }
     }
@@ -125,7 +141,7 @@ extension SearchPresenter: SearchPresentable {
         self.viewController.configure(with: viewModel)
     }
     
-    private func retriveArtsFromIDs(_ ids: [Int]) {
+    private func retriveArtsFromIDsFromSearch(_ ids: [Int]) {
         retrieveArtUseCases.retrieve(artRemoteIDs: ids) { [weak self] artModels in
             guard let `self` = self else { return }
             
@@ -133,10 +149,8 @@ extension SearchPresenter: SearchPresentable {
                 let viewModel = SearchView.ViewModel(state: .noResultsState)
                 self.viewController.configure(with: viewModel)
             } else {
-                for artModel in artModels {
-                    let cellViewModel = self.createCellViewModel(with: artModel)
-                    self.cellViewModels.append(cellViewModel)
-                }
+                let cellViewModels = artModels.map(self.createCellViewModel(with:))
+                self.cellViewModels.append(contentsOf: cellViewModels)
                 
                 self.artModels.append(contentsOf: artModels)
                 
