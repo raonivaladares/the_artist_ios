@@ -40,7 +40,45 @@ extension SearchPresenter: SearchPresentable {
             self.asyncTaskSome = asyncTaskSome
         case .cellTapped(let cellViewModel):
             cellTapped(with: cellViewModel)
+        case .presentedLastElements:
+            self.presentedLastElementsHandler()
         }
+    }
+    
+    private func presentedLastElementsHandler() {
+        if let lastViewModelCell = cellViewModels.last,
+               lastViewModelCell.isLoading != true {
+            
+            let loadingCellViewModel = SearchResultCell.ViewModel()
+            cellViewModels.append(loadingCellViewModel)
+            
+            let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
+            self.viewController.configure(with: viewModel)
+            
+            let ids = retrieveNextIDsForFetch()
+            retrieveArtUseCases.retrieve(artRemoteIDs: ids) { [weak self] artModels in
+                guard let `self` =  self else { return }
+                
+                self.cellViewModels = self.cellViewModels.dropLast()
+                let newCellViewModels = artModels.map(self.createCellViewModel(with:))
+                self.cellViewModels.append(contentsOf: newCellViewModels)
+                
+                let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: self.cellViewModels))
+                self.viewController.configure(with: viewModel)
+            }
+        }
+    }
+    
+    private func retrieveNextIDsForFetch() -> [Int] {
+        let idsSlice = banchOfIDsToRetrieve.dropFirst().first
+        return idsSlice ?? []
+    }
+    
+    private func addLoadingView() {
+        let loadingCellViewModel = SearchResultCell.ViewModel()
+
+        let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
+        self.viewController.configure(with: viewModel)
     }
     
     private func clearCurrentSearchResults() {

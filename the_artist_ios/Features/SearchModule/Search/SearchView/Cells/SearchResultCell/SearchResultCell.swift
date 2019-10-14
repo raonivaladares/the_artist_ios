@@ -61,6 +61,8 @@ final class SearchResultCell: UITableViewCell {
         
         if let url = viewModel.artImageURL {
             coverImageView.kf.setImage(with: url)
+        } else {
+            coverImageView.image = nil
         }
     }
     

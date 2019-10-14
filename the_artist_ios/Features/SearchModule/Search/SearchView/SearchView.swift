@@ -5,6 +5,7 @@ final class SearchView: UIView {
         case startTyping
         case endTyping(text: String)
         case cellTapped(content: SearchResultCell.ViewModel)
+        case presentedLastElements
     }
     
     // MARK: Private properties - UI
@@ -160,6 +161,12 @@ extension SearchView: UITableViewDataSource {
         
         let cellViewModel = cellsViewModels[indexPath.row]
         outputHandler?(.cellTapped(content: cellViewModel))
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == cellsViewModels.count {
+            outputHandler?(.presentedLastElements)
+        }
     }
 }
 
