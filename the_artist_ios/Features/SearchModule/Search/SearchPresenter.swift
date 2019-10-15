@@ -36,7 +36,7 @@ extension SearchPresenter: SearchPresentable {
         case .endTyping(let text):
             asyncTaskSome?.cancel()
             let asyncTaskSome = DispatchWorkItem { self.searchForArt(withText: text) }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 5, execute: asyncTaskSome)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: asyncTaskSome)
             self.asyncTaskSome = asyncTaskSome
         case .cellTapped(let cellViewModel):
             cellTapped(with: cellViewModel)
@@ -44,67 +44,21 @@ extension SearchPresenter: SearchPresentable {
             self.presentedLastElementsHandler()
         }
     }
-    
-    private func presentedLastElementsHandler() {
-        if let lastViewModelCell = cellViewModels.last,
-               lastViewModelCell.isLoading != true {
-            
-            addLoadingView()
-            let ids = retrieveNextIDsForFetch()
-            retriveArtsFromIDsFromLastElementsEvent(ids)
-        }
+}
+
+// MARK: - Private methods - cellTapped
+
+extension SearchPresenter {
+    private func cellTapped(with cellViewModel: SearchResultCell.ViewModel) {
+        let artModel = artModels.filter { $0.title == cellViewModel.artTitle }
+            .first!
+        router.pushArtDetails(with: artModel)
     }
-    
-    private func retriveArtsFromIDsFromLastElementsEvent(_ ids: [Int]) {
-        retrieveArtUseCases.retrieve(
-            artRemoteIDs: ids,
-            completion: { [weak self] in self?.retriveArtsFromIDsFooHandler(artModels: $0) }
-        )
-    }
-    
-    private func retriveArtsFromIDsFooHandler(artModels: [ArtModel]) {
-        self.artModels.append(contentsOf: artModels)
-        
-        removeLoadingFromCellViewModels()
-        createAndAppendCellViewModels(artModels: artModels)
-        updateContentFromViewController(cellViewModels: cellViewModels)
-    }
-    
-    private func updateContentFromViewController(cellViewModels: [SearchResultCell.ViewModel]) {
-        let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
-        self.viewController.configure(with: viewModel)
-    }
-    
-    private func removeLoadingFromCellViewModels() {
-        cellViewModels = cellViewModels.dropLast()
-    }
-    
-    private func createAndAppendCellViewModels(artModels: [ArtModel]) {
-        let newCellViewModels = artModels.map(createCellViewModel(with:))
-        cellViewModels.append(contentsOf: newCellViewModels)
-    }
-    
-    private func retrieveNextIDsForFetch() -> [Int] {
-        let idsSlice = banchOfIDsToRetrieve.dropFirst().first
-        return idsSlice ?? []
-    }
-    
-    private func addLoadingView() {
-        let loadingCellViewModel = SearchResultCell.ViewModel()
-        cellViewModels.append(loadingCellViewModel)
-        
-        let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
-        self.viewController.configure(with: viewModel)
-    }
-    
-    private func clearCurrentSearchResults() {
-        artModels = []
-        cellViewModels = []
-        banchOfIDsToRetrieve = []
-        let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: []))
-        viewController.configure(with: viewModel)
-    }
-    
+}
+
+// MARK: - Private methods - endTyping
+
+extension SearchPresenter {
     private func searchForArt(withText text: String) {
         searchArtUseCases.search(query: text) { result in
             switch result {
@@ -120,46 +74,87 @@ extension SearchPresenter: SearchPresentable {
         let fetchBanchLimite = 20
         let artIDsToRetrieve = artSearchResultModel.remoteArtsIDs
         
-        if artIDsToRetrieve.isEmpty {
+        if artIDsToRetrieve.isEmpty && artModels.isEmpty {
             let viewModel = SearchView.ViewModel(state: .noResultsState)
             viewController.configure(with: viewModel)
         } else {
             banchOfIDsToRetrieve = artIDsToRetrieve.chunked(into: fetchBanchLimite)
             
             if let ids = banchOfIDsToRetrieve.first {
-                updateViewWithLoadingCell()
+                updateViewControllerWithLoadingView()
                 banchOfIDsToRetrieve.removeFirst()
                 retriveArtsFromIDsFromSearch(ids)
             }
         }
     }
     
-    private func updateViewWithLoadingCell() {
-        let cellViewModels = [SearchResultCell.ViewModel()]
-
-        let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
-        self.viewController.configure(with: viewModel)
-    }
-    
     private func retriveArtsFromIDsFromSearch(_ ids: [Int]) {
         retrieveArtUseCases.retrieve(artRemoteIDs: ids) { [weak self] artModels in
             guard let `self` = self else { return }
             
-            if self.artModels.isEmpty && artModels.isEmpty {
+            if artModels.isEmpty {
                 let viewModel = SearchView.ViewModel(state: .noResultsState)
                 self.viewController.configure(with: viewModel)
             } else {
-                let cellViewModels = artModels.map(self.createCellViewModel(with:))
-                self.cellViewModels.append(contentsOf: cellViewModels)
-                
-                self.artModels.append(contentsOf: artModels)
-                
-                let viewModel = SearchView.ViewModel(
-                    state: .showContent(cellsViewModels: self.cellViewModels)
-                )
-                self.viewController.configure(with: viewModel)
+                self.updateViewController(withArtModels: artModels)
             }
         }
+    }
+}
+
+// MARK: - Private methods - startTyping
+
+extension SearchPresenter {
+    private func clearCurrentSearchResults() {
+          artModels = []
+          cellViewModels = []
+          banchOfIDsToRetrieve = []
+          let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: []))
+          viewController.configure(with: viewModel)
+      }
+}
+
+// MARK: - Private methods -
+
+extension SearchPresenter {
+    private func presentedLastElementsHandler() {
+        if let lastViewModelCell = cellViewModels.last,
+               lastViewModelCell.isLoading != true {
+            
+            updateViewControllerWithLoadingView()
+            let ids = retrieveNextIDsForFetch()
+            retriveArtsFromIDsFromLastElementsEvent(ids)
+        }
+    }
+    
+    private func retriveArtsFromIDsFromLastElementsEvent(_ ids: [Int]) {
+        retrieveArtUseCases.retrieve(artRemoteIDs: ids) { [weak self] artModels in
+            self?.updateViewController(withArtModels: artModels)
+        }
+        
+    }
+    
+    private func retrieveNextIDsForFetch() -> [Int] {
+        let idsSlice = banchOfIDsToRetrieve.dropFirst().first
+        return idsSlice ?? []
+    }
+}
+
+// MARK: - Private methods -
+
+extension SearchPresenter {
+    private func updateContentFromViewController(cellViewModels: [SearchResultCell.ViewModel]) {
+        let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
+        self.viewController.configure(with: viewModel)
+    }
+    
+    private func removeLoadingFromCellViewModels() {
+        cellViewModels = cellViewModels.dropLast()
+    }
+    
+    private func updateCellViewModel(withArtModels artModels: [ArtModel]) {
+        let newCellViewModels = artModels.map(createCellViewModel(with:))
+        cellViewModels.append(contentsOf: newCellViewModels)
     }
     
     private func createCellViewModel(with artModel: ArtModel) -> SearchResultCell.ViewModel {
@@ -169,10 +164,24 @@ extension SearchPresenter: SearchPresentable {
             artImageURL: URL(string: artModel.primaryImageSmall)
         )
     }
+}
+
+// MARK: - Private methods -
+
+extension SearchPresenter {
+    private func updateViewControllerWithLoadingView() {
+        let loadingCellViewModel = SearchResultCell.ViewModel()
+        cellViewModels.append(loadingCellViewModel)
+        
+        let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
+        self.viewController.configure(with: viewModel)
+    }
     
-    private func cellTapped(with cellViewModel: SearchResultCell.ViewModel) {
-        let artModel = artModels.filter { $0.title == cellViewModel.artTitle }
-            .first!
-        router.pushArtDetails(with: artModel)
+    private func updateViewController(withArtModels artModels: [ArtModel]) {
+        self.artModels.append(contentsOf: artModels)
+        removeLoadingFromCellViewModels()
+        updateCellViewModel(withArtModels: artModels)
+        updateContentFromViewController(cellViewModels: cellViewModels)
     }
 }
+
