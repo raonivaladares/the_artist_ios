@@ -80,9 +80,9 @@ extension SearchPresenter {
         } else {
             banchOfIDsToRetrieve = artIDsToRetrieve.chunked(into: fetchBanchLimite)
             
-            if let ids = banchOfIDsToRetrieve.first {
+            let ids = popNextIDsToRetrieve()
+            if !ids.isEmpty {
                 updateViewControllerWithLoadingView()
-                banchOfIDsToRetrieve.removeFirst()
                 retriveArtsFromIDsFromSearch(ids)
             }
         }
@@ -109,8 +109,7 @@ extension SearchPresenter {
           artModels = []
           cellViewModels = []
           banchOfIDsToRetrieve = []
-          let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: []))
-          viewController.configure(with: viewModel)
+          updateViewController(withArtModels: [])
       }
 }
 
@@ -121,9 +120,9 @@ extension SearchPresenter {
         if let lastViewModelCell = cellViewModels.last,
                lastViewModelCell.isLoading != true {
             
-            if let ids = banchOfIDsToRetrieve.first {
+            let ids = popNextIDsToRetrieve()
+            if !ids.isEmpty {
                 updateViewControllerWithLoadingView()
-                banchOfIDsToRetrieve.removeFirst()
                 retriveArtsFromIDsFromLastElementsEvent(ids)
             }
         }
@@ -139,11 +138,6 @@ extension SearchPresenter {
 // MARK: - Private methods
 
 extension SearchPresenter {
-    private func updateContentFromViewController(cellViewModels: [SearchResultCell.ViewModel]) {
-        let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
-        self.viewController.configure(with: viewModel)
-    }
-    
     private func removeLoadingFromCellViewModels() {
         cellViewModels = cellViewModels.dropLast()
     }
@@ -160,11 +154,21 @@ extension SearchPresenter {
             artImageURL: URL(string: artModel.primaryImageSmall)
         )
     }
-}
-
-// MARK: - Private methods -
-
-extension SearchPresenter {
+    
+    private func popNextIDsToRetrieve() -> [Int] {
+        var idsToRetrieve: [Int] = []
+        if let ids = banchOfIDsToRetrieve.first {
+            idsToRetrieve = ids
+        }
+        
+        return idsToRetrieve
+    }
+    
+    private func updateContentFromViewController(cellViewModels: [SearchResultCell.ViewModel]) {
+        let viewModel = SearchView.ViewModel(state: .showContent(cellsViewModels: cellViewModels))
+        self.viewController.configure(with: viewModel)
+    }
+    
     private func updateViewControllerWithLoadingView() {
         let loadingCellViewModel = SearchResultCell.ViewModel()
         cellViewModels.append(loadingCellViewModel)
@@ -180,4 +184,3 @@ extension SearchPresenter {
         updateContentFromViewController(cellViewModels: cellViewModels)
     }
 }
-
