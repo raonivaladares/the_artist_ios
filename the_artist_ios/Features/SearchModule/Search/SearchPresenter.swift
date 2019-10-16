@@ -114,16 +114,18 @@ extension SearchPresenter {
       }
 }
 
-// MARK: - Private methods -
+// MARK: - Private methods - presentedLastElements
 
 extension SearchPresenter {
     private func presentedLastElementsHandler() {
         if let lastViewModelCell = cellViewModels.last,
                lastViewModelCell.isLoading != true {
             
-            updateViewControllerWithLoadingView()
-            let ids = retrieveNextIDsForFetch()
-            retriveArtsFromIDsFromLastElementsEvent(ids)
+            if let ids = banchOfIDsToRetrieve.first {
+                updateViewControllerWithLoadingView()
+                banchOfIDsToRetrieve.removeFirst()
+                retriveArtsFromIDsFromLastElementsEvent(ids)
+            }
         }
     }
     
@@ -131,16 +133,10 @@ extension SearchPresenter {
         retrieveArtUseCases.retrieve(artRemoteIDs: ids) { [weak self] artModels in
             self?.updateViewController(withArtModels: artModels)
         }
-        
-    }
-    
-    private func retrieveNextIDsForFetch() -> [Int] {
-        let idsSlice = banchOfIDsToRetrieve.dropFirst().first
-        return idsSlice ?? []
     }
 }
 
-// MARK: - Private methods -
+// MARK: - Private methods
 
 extension SearchPresenter {
     private func updateContentFromViewController(cellViewModels: [SearchResultCell.ViewModel]) {
